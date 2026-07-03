@@ -1,0 +1,117 @@
+name: Build and Publish
+
+# 推送到 main 分支或打 v* tag 时触发：Flutter 打包 APK → 上传 Cloudflare R2 → 更新 manifest.json
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+# 同一分支新推送取消旧构建
+concurrency:
+  group: build-publish-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: stable
+          cache: true
+
+      - name: Flutter dependencies
+        run: flutter pub get
+
+      - name: Read version & build number
+        id: ver
+        run: |
+          APP_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
+          BUILD_NUMBER=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2)
+          echo "app_version=$APP_VERSION" >> $GITHUB_OUTPUT
+          echo "build_number=$BUILD_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Build release APK (split per abi)
+        run: flutter build apk --release --split-per-abi
+
+      - name: Rename arm64 APK
+        run: |
+          mv build/app/outputs/flutter-apk/app-arm64-v8a-release.apk \
+             app-release-${{ steps.ver.outputs.app_version }}-build${{ steps.ver.outputs.build_number }}.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk
+          path: app-release-*.apk
+          if-no-files-found: error
+
+      - name: Show version
+        run: |
+          echo "Built version ${{ steps.ver.outputs.app_version }}+${{ steps.ver.outputs.build_number }}"
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    # 仅 main / tag 触发发布
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: apk
+
+      - name: Read version & build number
+        id: ver
+        run: |
+          APP_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
+          BUILD_NUMBER=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2)
+          echo "app_version=$APP_VERSION" >> $GITHUB_OUTPUT
+          echo "build_number=$BUILD_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS CLI for Cloudflare R2
+        env:
+          R2_KEY: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          R2_SECRET: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+        run: |
+          aws configure set aws_access_key_id "$R2_KEY"
+          aws configure set aws_secret_access_key "$R2_SECRET"
+          aws configure set region auto
+
+      - name: Upload APK to R2
+        env:
+          R2_ENDPOINT: ${{ secrets.CLOUDFLARE_R2_ENDPOINT }}
+          R2_BUCKET: ${{ secrets.CLOUDFLARE_R2_BUCKET }}
+        run: |
+          aws s3 cp app-release-${{ steps.ver.outputs.app_version }}-build${{ steps.ver.outputs.build_number }}.apk \
+            s3://${R2_BUCKET}/android/ \
+            --endpoint-url "$R2_ENDPOINT" \
+            --checksum-algorithm SHA256
+
+      - name: Generate manifest.json
+        env:
+          CDN_BASE: ${{ secrets.CDN_BASE }}
+          RELEASE_NOTES: ${{ secrets.RELEASE_NOTES }}
+          MIN_REQUIRED_VERSION: ${{ secrets.MIN_REQUIRED_VERSION }}
+        run: |
+          chmod +x scripts/generate_manifest.sh
+          ./scripts/generate_manifest.sh \
+            "${{ steps.ver.outputs.app_version }}" \
+            "${{ steps.ver.outputs.build_number }}"
+
+      - name: Upload manifest.json to R2
+        env:
+          R2_ENDPOINT: ${{ secrets.CLOUDFLARE_R2_ENDPOINT }}
+          R2_BUCKET: ${{ secrets.CLOUDFLARE_R2_BUCKET }}
+        run: |
+          aws s3 cp manifest.json \
+            s3://${R2_BUCKET}/manifest.json \
+            --endpoint-url "$R2_ENDPOINT" \
+            --content-type "application/json"
+
+      - name: Manifest preview
+        run: cat manifest.json

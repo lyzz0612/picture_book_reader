@@ -1,0 +1,31 @@
+name: picture_book_reader
+description: 绘本阅读 App - 文字版 / 绘本版双模式
+publish_to: 'none'
+
+# version: 语义化版本 + 构建号
+# CI 打包时读取此字段写入 manifest.json，App 端据此判断是否需要更新。
+version: 0.1.0+3
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  http: ^1.2.0
+  path_provider: ^2.1.0
+  crypto: ^3.0.3
+  package_info_plus: ^8.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/books/
+    - assets/books/book_001/
+    - assets/books/book_002/
