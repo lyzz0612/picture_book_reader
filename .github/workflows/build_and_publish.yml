@@ -36,9 +36,6 @@ jobs:
                           android/app/src/main/kotlin/com/example/picture_book_reader/MainActivity.kt
           sed -i 's/org.jetbrains.kotlin.android" version "[^"]*"/org.jetbrains.kotlin.android" version "1.9.24"/' android/settings.gradle
           sed -i 's/ext.kotlin_version = "[^"]*"/ext.kotlin_version = "1.9.24"/' android/build.gradle
-          echo "--- settings.gradle kotlin version ---"
-          grep -i kotlin android/settings.gradle || true
-          grep -i kotlin android/build.gradle || true
 
       - name: Flutter dependencies
         run: flutter pub get
