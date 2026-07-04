@@ -28,10 +28,17 @@ jobs:
         # 仓库只提交了自定义 AndroidManifest / MainActivity / file_paths，
         # 缺 settings.gradle / build.gradle / gradle wrapper 等脚手架。
         # flutter create 补全后用 git checkout 恢复被覆盖的自定义配置。
+        # 另：flutter create 默认 Kotlin 版本过旧，package_info_plus 8.x 需 1.9+，
+        # 用 sed 升级 settings.gradle 里的 Kotlin 插件版本。
         run: |
           flutter create --org com.example --platforms=android --project-name picture_book_reader .
           git checkout -- android/app/src/main/AndroidManifest.xml \
                           android/app/src/main/kotlin/com/example/picture_book_reader/MainActivity.kt
+          sed -i 's/org.jetbrains.kotlin.android" version "[^"]*"/org.jetbrains.kotlin.android" version "1.9.24"/' android/settings.gradle
+          sed -i 's/ext.kotlin_version = "[^"]*"/ext.kotlin_version = "1.9.24"/' android/build.gradle
+          echo "--- settings.gradle kotlin version ---"
+          grep -i kotlin android/settings.gradle || true
+          grep -i kotlin android/build.gradle || true
 
       - name: Flutter dependencies
         run: flutter pub get
