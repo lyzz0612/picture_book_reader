@@ -24,6 +24,15 @@ jobs:
           channel: stable
           cache: true
 
+      - name: Bootstrap Android scaffolding
+        # 仓库只提交了自定义 AndroidManifest / MainActivity / file_paths，
+        # 缺 settings.gradle / build.gradle / gradle wrapper 等脚手架。
+        # flutter create 补全后用 git checkout 恢复被覆盖的自定义配置。
+        run: |
+          flutter create --org com.example --platforms=android --project-name picture_book_reader .
+          git checkout -- android/app/src/main/AndroidManifest.xml \
+                          android/app/src/main/kotlin/com/example/picture_book_reader/MainActivity.kt
+
       - name: Flutter dependencies
         run: flutter pub get
 
