@@ -1,0 +1,26 @@
+{
+  "id": "book_001",
+  "title": "小兔子的冒险",
+  "coverPath": "books/book_001/cover.png",
+  "mode": "pictureBook",
+  "estimatedMinutes": 5,
+  "pages": [
+    {
+      "id": "p1",
+      "imagePath": "books/book_001/page_01.png",
+      "segments": [
+        { "id": "s1", "text": "从前有一只小兔子，它住在一个温暖的洞穴里。" },
+        { "id": "s2", "text": "有一天，它决定去看看外面的世界。" },
+        { "id": "s3", "text": "于是它蹦蹦跳跳地出发了。" }
+      ]
+    },
+    {
+      "id": "p2",
+      "imagePath": "books/book_001/page_02.png",
+      "segments": [
+        { "id": "s4", "text": "小兔子来到了一条小河边。" },
+        { "id": "s5", "text": "它看到水里有一条金色的小鱼。" }
+      ]
+    }
+  ]
+}
