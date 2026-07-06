@@ -7,12 +7,14 @@ class BookIndexEntry {
   final String id;
   final String title;
   final BookMode mode;
+  final String coverPath; // 相对 assets 的封面路径（空字符串表示无封面，用占位图）
   final String metaPath; // 相对 assets 的 meta.json 路径
 
   const BookIndexEntry({
     required this.id,
     required this.title,
     required this.mode,
+    required this.coverPath,
     required this.metaPath,
   });
 
@@ -21,6 +23,7 @@ class BookIndexEntry {
       id: json['id'] as String,
       title: json['title'] as String,
       mode: BookMode.fromString(json['mode'] as String),
+      coverPath: (json['coverPath'] as String?) ?? '',
       metaPath: json['metaPath'] as String,
     );
   }
