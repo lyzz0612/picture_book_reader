@@ -99,9 +99,10 @@ jobs:
         env:
           R2_ENDPOINT: ${{ secrets.CLOUDFLARE_R2_ENDPOINT }}
           R2_BUCKET: ${{ secrets.CLOUDFLARE_R2_BUCKET }}
+          R2_PREFIX: ${{ secrets.R2_PREFIX || 'picture_book_reader' }}
         run: |
           aws s3 cp app-release-${{ steps.ver.outputs.app_version }}-build${{ steps.ver.outputs.build_number }}.apk \
-            s3://${R2_BUCKET}/android/ \
+            s3://${R2_BUCKET}/${R2_PREFIX}/android/ \
             --endpoint-url "$R2_ENDPOINT" \
             --checksum-algorithm SHA256
 
@@ -120,9 +121,10 @@ jobs:
         env:
           R2_ENDPOINT: ${{ secrets.CLOUDFLARE_R2_ENDPOINT }}
           R2_BUCKET: ${{ secrets.CLOUDFLARE_R2_BUCKET }}
+          R2_PREFIX: ${{ secrets.R2_PREFIX || 'picture_book_reader' }}
         run: |
           aws s3 cp manifest.json \
-            s3://${R2_BUCKET}/manifest.json \
+            s3://${R2_BUCKET}/${R2_PREFIX}/manifest.json \
             --endpoint-url "$R2_ENDPOINT" \
             --content-type "application/json"
 

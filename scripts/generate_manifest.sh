@@ -4,7 +4,9 @@
 # 用法: ./scripts/generate_manifest.sh <version> <build_number>
 #
 # 读取环境变量:
-#   CDN_BASE              CDN 根地址，如 https://cdn.example.com/picture_book_reader
+#   CDN_BASE              CDN 根地址（完整指定，含项目前缀，不带末尾斜杠）
+#                         如 https://cdn.example.com/picture_book_reader
+#                         需与 workflow 中 R2_PREFIX 上传路径保持一致
 #   RELEASE_NOTES         更新说明（可选）
 #   MIN_REQUIRED_VERSION  最低强制更新版本（可选，默认 0.0.1）
 #
@@ -14,7 +16,9 @@ set -euo pipefail
 APP_VERSION="${1:?usage: generate_manifest.sh <version> <build_number>}"
 BUILD_NUMBER="${2:?usage: generate_manifest.sh <version> <build_number>}"
 
+# CDN_BASE 由 secret 完整指定，仅去掉末尾斜杠避免双斜杠
 CDN_BASE="${CDN_BASE:-https://cdn.example.com/picture_book_reader}"
+CDN_BASE="${CDN_BASE%/}"
 RELEASE_NOTES="${RELEASE_NOTES:-新版本已发布}"
 MIN_REQUIRED_VERSION="${MIN_REQUIRED_VERSION:-0.0.1}"
 
