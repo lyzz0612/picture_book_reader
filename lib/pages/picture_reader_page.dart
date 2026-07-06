@@ -52,10 +52,23 @@ class _PictureReaderPageState extends State<PictureReaderPage> {
   }
 
   void _finish() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('阅读完成')),
-    );
-    Navigator.pop(context);
+    // 阅读完成弹窗：原 SnackBar 在 pop 后不可见，改用对话框给用户明确反馈
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        title: const Text('阅读完成'),
+        content: Text('《${widget.book.title}》已经读完啦'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('返回书架'),
+          ),
+        ],
+      ),
+    ).then((_) {
+      if (mounted) Navigator.pop(context);
+    });
   }
 
   @override
@@ -97,63 +110,70 @@ class _PictureReaderPageState extends State<PictureReaderPage> {
   }
 
   Widget _buildContent() {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        // 图片层
-        if (_currentPage.imagePath != null)
-          Image.asset(
-            'assets/${_currentPage.imagePath}',
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) =>
-                Container(color: Colors.grey.shade300),
-          )
-        else
-          Container(color: Colors.grey.shade200),
+    return LayoutBuilder(builder: (context, constraints) {
+      // 文字段区域最大占屏幕高度 45%，防止长文本溢出
+      final maxTextHeight = constraints.maxHeight * 0.45;
+      return Stack(
+        fit: StackFit.expand,
+        children: [
+          // 图片层
+          if (_currentPage.imagePath != null)
+            Image.asset(
+              'assets/${_currentPage.imagePath}',
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) =>
+                  Container(color: Colors.grey.shade300),
+            )
+          else
+            Container(color: Colors.grey.shade200),
 
-        // 渐变遮罩 + 文字段
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(20, 40, 20, 24),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.black.withOpacity(0.75),
-                ],
+          // 渐变遮罩 + 文字段
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              constraints: BoxConstraints(maxHeight: maxTextHeight),
+              padding: const EdgeInsets.fromLTRB(20, 40, 20, 24),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withOpacity(0.75),
+                  ],
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (int i = 0; i < _currentPage.segments.length; i++)
+                      TextSegmentView(
+                        segment: _currentPage.segments[i],
+                        state: i == _segmentIndex
+                            ? SegmentState.current
+                            : i < _segmentIndex
+                                ? SegmentState.read
+                                : SegmentState.unread,
+                      ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '点击右侧下一段 · 点击左侧上一段',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (int i = 0; i < _currentPage.segments.length; i++)
-                  TextSegmentView(
-                    segment: _currentPage.segments[i],
-                    state: i == _segmentIndex
-                        ? SegmentState.current
-                        : i < _segmentIndex
-                            ? SegmentState.read
-                            : SegmentState.unread,
-                  ),
-                const SizedBox(height: 8),
-                Text(
-                  '点击右侧下一段 · 点击左侧上一段',
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.5),
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }

@@ -1,6 +1,6 @@
 {
   "books": [
-    { "id": "book_001", "title": "小兔子的冒险", "mode": "pictureBook", "metaPath": "books/book_001/meta.json" },
-    { "id": "book_002", "title": "睡前故事集", "mode": "textOnly", "metaPath": "books/book_002/meta.json" }
+    { "id": "book_001", "title": "小兔子的冒险", "mode": "pictureBook", "coverPath": "books/book_001/cover.png", "metaPath": "books/book_001/meta.json" },
+    { "id": "book_002", "title": "睡前故事集", "mode": "textOnly", "coverPath": "", "metaPath": "books/book_002/meta.json" }
   ]
 }

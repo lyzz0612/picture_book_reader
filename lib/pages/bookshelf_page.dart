@@ -69,7 +69,7 @@ class _BookshelfPageState extends State<BookshelfPage> {
         final e = _entries![i];
         return BookCard(
           title: e.title,
-          coverPath: null,
+          coverPath: e.coverPath.isEmpty ? null : e.coverPath,
           onTap: () => _openBook(e),
         );
       },
