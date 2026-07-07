@@ -3,8 +3,12 @@ description: 绘本阅读 App - 文字版 / 绘本版双模式
 publish_to: 'none'
 
 # version: 语义化版本 + 构建号
-# CI 打包时读取此字段写入 manifest.json，App 端据此判断是否需要更新。
-version: 0.1.0+3
+# 语义版本（0.1.0）手动维护，发大版本时 bump。
+# 构建号 CI 不读这里的值——GitHub Actions 用 github.run_number 通过
+# `flutter build --build-number` 覆盖，保证每次 CI 产物构建号唯一递增，
+# App 端 PackageInfo 反映 CI 构建号，据此判断是否需要更新。
+# 这里的 +1 仅作本地默认（本地直接 flutter run/build 时使用）。
+version: 0.1.0+1
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
