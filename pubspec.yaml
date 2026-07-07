@@ -21,6 +21,7 @@ dependencies:
   path_provider: ^2.1.0
   crypto: ^3.0.3
   package_info_plus: ^8.0.0
+  url_launcher: ^6.2.5
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +31,21 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/books/
+    - assets/books/index.json
     - assets/books/book_001/
     - assets/books/book_002/
+    - assets/books/book_003/
+    - assets/books/book_004/
+    - assets/books/book_005/
+    - assets/books/book_006/
+    - assets/books/book_007/
+    - assets/books/book_008/
+    - assets/books/book_009/
+    - assets/books/book_010/
+    - assets/books/book_011/
+    - assets/books/book_012/
+    - assets/books/book_013/
+    - assets/books/book_014/
+    - assets/books/book_015/
+    - assets/books/book_016/
+    - assets/books/book_017/
