@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
@@ -45,17 +46,26 @@ class UpdateService {
 
   Future<UpdateInfo?> checkForUpdate() async {
     await _ensureInit();
+    debugPrint('[Update] local: version=$_localVersion build=$_localBuild');
+    debugPrint('[Update] request: ${AppConstants.manifestUrl}');
     final response = await http
         .get(Uri.parse(AppConstants.manifestUrl))
         .timeout(AppConstants.manifestTimeout);
-    if (response.statusCode != 200) return null;
+    debugPrint('[Update] response: status=${response.statusCode} '
+        'len=${response.body.length}');
+    if (response.statusCode != 200) {
+      throw UpdateException('获取版本清单失败: HTTP ${response.statusCode}');
+    }
     final manifest = jsonDecode(response.body) as Map<String, dynamic>;
 
     final remoteVersion = manifest['latestVersion'] as String;
     final remoteBuild = manifest['latestBuild'] as int;
+    debugPrint('[Update] remote: version=$remoteVersion build=$remoteBuild');
 
-    if (_compareVersion(remoteVersion, _localVersion) > 0 ||
-        (remoteVersion == _localVersion && remoteBuild > _localBuild)) {
+    final hasNewVersion = _compareVersion(remoteVersion, _localVersion) > 0 ||
+        (remoteVersion == _localVersion && remoteBuild > _localBuild);
+    debugPrint('[Update] hasNewVersion=$hasNewVersion');
+    if (hasNewVersion) {
       return UpdateInfo.fromManifest(manifest);
     }
     return null;
