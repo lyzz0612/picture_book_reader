@@ -1,26 +1,59 @@
 import 'package:flutter/material.dart';
 import '../models/book.dart';
 
-/// 文字版阅读页：纯文字流，连续滚动，家长照念
-class TextReaderPage extends StatelessWidget {
+class TextReaderPage extends StatefulWidget {
   final Book book;
 
   const TextReaderPage({super.key, required this.book});
 
   @override
+  State<TextReaderPage> createState() => _TextReaderPageState();
+}
+
+class _TextReaderPageState extends State<TextReaderPage> {
+  late bool _dark;
+
+  @override
+  void initState() {
+    super.initState();
+    _dark = WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+        Brightness.dark;
+  }
+
+  void _toggleDark() => setState(() => _dark = !_dark);
+
+  @override
   Widget build(BuildContext context) {
-    final allSegments =
-        book.pages.expand((p) => p.segments).toList();
+    final allSegments = widget.book.pages.expand((p) => p.segments).toList();
+
+    final bgColor =
+        _dark ? Colors.black : Theme.of(context).scaffoldBackgroundColor;
+    final textColor = _dark ? const Color(0xFFD7D7D7) : Colors.black87;
+    final appBarBg = _dark ? Colors.black : null;
+    final appBarFg = _dark ? const Color(0xFFD7D7D7) : null;
+
     return Scaffold(
+      backgroundColor: bgColor,
       appBar: AppBar(
-        title: Text(book.title),
+        backgroundColor: appBarBg,
+        foregroundColor: appBarFg,
+        centerTitle: true,
+        title: Text(widget.book.title),
         actions: [
-          if (book.estimatedMinutes != null)
+          IconButton(
+            icon:
+                Icon(_dark ? Icons.light_mode_outlined : Icons.dark_mode_outlined),
+            tooltip: _dark ? '切换日间' : '切换夜间',
+            onPressed: _toggleDark,
+          ),
+          if (widget.book.estimatedMinutes != null)
             Padding(
               padding: const EdgeInsets.only(right: 16),
               child: Center(
-                child: Text('约 ${book.estimatedMinutes} 分钟',
-                    style: Theme.of(context).textTheme.bodySmall),
+                child: Text(
+                  '约 ${widget.book.estimatedMinutes} 分钟',
+                  style: TextStyle(color: appBarFg),
+                ),
               ),
             ),
         ],
@@ -32,7 +65,7 @@ class TextReaderPage extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 20),
           child: Text(
             allSegments[i].text,
-            style: const TextStyle(fontSize: 20, height: 1.9),
+            style: TextStyle(fontSize: 20, height: 1.9, color: textColor),
           ),
         ),
       ),

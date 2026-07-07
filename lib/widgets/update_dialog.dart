@@ -1,11 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/update_info.dart';
 import '../services/update_service.dart';
 
-/// 更新提示弹窗
 class UpdateDialog extends StatefulWidget {
   final UpdateInfo info;
-  final bool force; // 强制更新（低于 minRequiredVersion）
+  final bool force;
 
   const UpdateDialog({
     super.key,
@@ -20,6 +21,9 @@ class UpdateDialog extends StatefulWidget {
 class _UpdateDialogState extends State<UpdateDialog> {
   bool _downloading = false;
   double _progress = 0;
+
+  String? get _platformUrl =>
+      Platform.isAndroid ? widget.info.android?.url : widget.info.ios?.url;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +52,11 @@ class _UpdateDialogState extends State<UpdateDialog> {
           ],
         ),
         actions: [
+          if (_platformUrl != null)
+            TextButton(
+              onPressed: _downloading ? null : _openInBrowser,
+              child: const Text('浏览器下载'),
+            ),
           if (!widget.force)
             TextButton(
               onPressed: _downloading ? null : () => Navigator.pop(context),
@@ -74,12 +83,24 @@ class _UpdateDialogState extends State<UpdateDialog> {
           if (t > 0) setState(() => _progress = r / t);
         },
       );
-      // 安装器拉起后，App 会被系统暂停，用户安装完重启即可
     } catch (e) {
       if (mounted) {
         setState(() => _downloading = false);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('更新失败: $e')),
+          SnackBar(content: Text('更新失败: $e。可改用浏览器下载。')),
+        );
+      }
+    }
+  }
+
+  Future<void> _openInBrowser() async {
+    final url = _platformUrl;
+    if (url == null) return;
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('无法打开浏览器，请手动复制链接下载')),
         );
       }
     }

@@ -1,16 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:crypto/crypto.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import '../core/constants.dart';
 import '../models/update_info.dart';
-import '../widgets/update_dialog.dart';
 
-/// 更新异常
 class UpdateException implements Exception {
   final String message;
   UpdateException(this.message);
@@ -18,24 +15,15 @@ class UpdateException implements Exception {
   String toString() => 'UpdateException: $message';
 }
 
-/// 版本检查 + 下载 + 安装服务
-///
-/// 流程：启动请求 manifest.json → 比对本地版本号 → 有新版弹窗
-/// → 用户确认 → 下载 APK → SHA256 校验 → 调用系统安装器
 class UpdateService {
   UpdateService._();
   static final UpdateService instance = UpdateService._();
 
-  /// Android 系统安装器通道（对应 MainActivity 中的 MethodChannel）
   static const MethodChannel _installerChannel = MethodChannel('app.installer');
 
-  GlobalKey<NavigatorState>? _navigatorKey;
   String _localVersion = '0.0.0';
   int _localBuild = 0;
   bool _initialized = false;
-  bool _checking = false;
-
-  void setNavigatorKey(GlobalKey<NavigatorState> key) => _navigatorKey = key;
 
   Future<void> _ensureInit() async {
     if (_initialized) return;
@@ -45,27 +33,16 @@ class UpdateService {
     _initialized = true;
   }
 
-  /// 启动时静默检查更新，有新版本则弹窗
-  Future<void> checkForUpdateOnLaunch() async {
-    if (_checking) return;
-    _checking = true;
-    try {
-      final info = await checkForUpdate();
-      if (info != null) {
-        final force =
-            _compareVersion(info.minRequiredVersion, _localVersion) > 0;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          _showUpdateDialog(info, force: force);
-        });
-      }
-    } catch (_) {
-      // 静默失败，不打扰用户
-    } finally {
-      _checking = false;
-    }
+  Future<String> getLocalVersion() async {
+    await _ensureInit();
+    return _localVersion;
   }
 
-  /// 主动检查更新，返回更新信息或 null
+  Future<int> getLocalBuild() async {
+    await _ensureInit();
+    return _localBuild;
+  }
+
   Future<UpdateInfo?> checkForUpdate() async {
     await _ensureInit();
     final response = await http
@@ -77,7 +54,6 @@ class UpdateService {
     final remoteVersion = manifest['latestVersion'] as String;
     final remoteBuild = manifest['latestBuild'] as int;
 
-    // 版本号或构建号有更新
     if (_compareVersion(remoteVersion, _localVersion) > 0 ||
         (remoteVersion == _localVersion && remoteBuild > _localBuild)) {
       return UpdateInfo.fromManifest(manifest);
@@ -85,7 +61,11 @@ class UpdateService {
     return null;
   }
 
-  /// 下载并安装（Android）
+  Future<bool> isForceUpdateRequired(UpdateInfo info) async {
+    await _ensureInit();
+    return _compareVersion(info.minRequiredVersion, _localVersion) > 0;
+  }
+
   Future<void> downloadAndInstall(
     UpdateInfo info, {
     void Function(int received, int total)? onProgress,
@@ -99,17 +79,14 @@ class UpdateService {
     final filePath =
         '${dir.path}/app-release-${info.latestVersion}-build${info.latestBuild}.apk';
 
-    // 1. 下载到临时目录
     await _downloadFile(platformInfo.url, filePath, onProgress: onProgress);
 
-    // 2. SHA256 校验
     final hash = await _calculateSha256(filePath);
     if (hash != platformInfo.sha256) {
       File(filePath).deleteSync();
       throw UpdateException('文件校验失败');
     }
 
-    // 3. 调用系统安装器
     await _installApk(filePath);
   }
 
@@ -156,17 +133,6 @@ class UpdateService {
     }
   }
 
-  void _showUpdateDialog(UpdateInfo info, {required bool force}) {
-    final context = _navigatorKey?.currentContext;
-    if (context == null) return;
-    showDialog(
-      context: context,
-      barrierDismissible: !force,
-      builder: (_) => UpdateDialog(info: info, force: force),
-    );
-  }
-
-  /// 语义化版本比较：>0 表示 a 更新，<0 表示 b 更新，0 表示相同
   int _compareVersion(String a, String b) {
     final pa = a.split('.').map(int.tryParse).whereType<int>().toList();
     final pb = b.split('.').map(int.tryParse).whereType<int>().toList();
