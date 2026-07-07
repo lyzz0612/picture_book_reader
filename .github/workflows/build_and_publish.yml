@@ -45,17 +45,12 @@ jobs:
 
       - name: Read version
         id: ver
-        # 从 pubspec 读取 major.minor（patch 由 CI 用 run_number 覆盖）。
-        # versionName = major.minor.run_number (如 0.1.16)
-        # versionCode = patch + minor×10000 + major×1000000 (如 10016)
-        # App 端 PackageInfo.version → versionName，PackageInfo.buildNumber → versionCode
+        # 统一脚本计算 versionName/versionCode，build 和 publish 共用，
+        # 避免两个 job 重复实现导致不一致。
+        env:
+          RUN_NUMBER: ${{ github.run_number }}
         run: |
-          PUBSPEC_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
-          MAJOR=$(echo "$PUBSPEC_VERSION" | cut -d '.' -f 1)
-          MINOR=$(echo "$PUBSPEC_VERSION" | cut -d '.' -f 2)
-          RUN_NUMBER=${{ github.run_number }}
-          VERSION_NAME="${MAJOR}.${MINOR}.${RUN_NUMBER}"
-          VERSION_CODE=$((RUN_NUMBER + MINOR * 10000 + MAJOR * 1000000))
+          source scripts/compute_version.sh
           echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
           echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
 
@@ -69,6 +64,27 @@ jobs:
         # 文件名固定为 app-release.apk，R2 对象 key 固定覆盖；版本区分交给下载 URL 的 ?v= 查询串
         run: |
           cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk app-release.apk
+
+      - name: Verify APK version
+        # 从构建产物读出实际 versionName/versionCode，和计算值比对，不一致则报错中止。
+        # 防止 --build-name/--build-number 没生效，或 CI 模板覆盖了版本号。
+        run: |
+          APK_INFO=$(aapt dump badging app-release.apk 2>/dev/null | grep -E "package:|versionName|versionCode")
+          echo "APK badging:"
+          echo "$APK_INFO"
+          ACTUAL_NAME=$(echo "$APK_INFO" | grep -oP "versionName='\K[^']+")
+          ACTUAL_CODE=$(echo "$APK_INFO" | grep -oP "versionCode='\K[^']+")
+          echo "Expected: versionName=${{ steps.ver.outputs.version_name }} versionCode=${{ steps.ver.outputs.version_code }}"
+          echo "Actual:   versionName=$ACTUAL_NAME versionCode=$ACTUAL_CODE"
+          if [[ "$ACTUAL_NAME" != "${{ steps.ver.outputs.version_name }}" ]]; then
+            echo "ERROR: versionName 不匹配" >&2
+            exit 1
+          fi
+          if [[ "$ACTUAL_CODE" != "${{ steps.ver.outputs.version_code }}" ]]; then
+            echo "ERROR: versionCode 不匹配" >&2
+            exit 1
+          fi
+          echo "OK: APK 版本号与计算值一致"
 
       - uses: actions/upload-artifact@v4
         with:
@@ -94,13 +110,10 @@ jobs:
 
       - name: Read version & build number
         id: ver
+        env:
+          RUN_NUMBER: ${{ github.run_number }}
         run: |
-          PUBSPEC_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
-          MAJOR=$(echo "$PUBSPEC_VERSION" | cut -d '.' -f 1)
-          MINOR=$(echo "$PUBSPEC_VERSION" | cut -d '.' -f 2)
-          RUN_NUMBER=${{ github.run_number }}
-          VERSION_NAME="${MAJOR}.${MINOR}.${RUN_NUMBER}"
-          VERSION_CODE=$((RUN_NUMBER + MINOR * 10000 + MAJOR * 1000000))
+          source scripts/compute_version.sh
           echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
           echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
 
