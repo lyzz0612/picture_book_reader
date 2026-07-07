@@ -36,7 +36,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '版本 ${widget.info.latestVersion} (build ${widget.info.latestBuild})',
+              '版本 ${widget.info.latestVersion} (${widget.info.latestVersionCode})',
               style: const TextStyle(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),

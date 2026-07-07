@@ -21,16 +21,16 @@ class PlatformUpdateInfo {
 
 /// 远端版本清单解析结果
 class UpdateInfo {
-  final String latestVersion; // 最新语义化版本
-  final int latestBuild; // 最新构建号
+  final String latestVersion; // versionName，如 "0.1.16"
+  final int latestVersionCode; // versionCode，整数，如 10016
   final PlatformUpdateInfo? android;
   final PlatformUpdateInfo? ios;
   final String releaseNotes; // 更新说明
-  final String minRequiredVersion; // 低于此版本强制更新
+  final String minRequiredVersion; // 低于此版本强制更新（versionName 格式）
 
   const UpdateInfo({
     required this.latestVersion,
-    required this.latestBuild,
+    required this.latestVersionCode,
     this.android,
     this.ios,
     required this.releaseNotes,
@@ -41,7 +41,7 @@ class UpdateInfo {
     final platforms = (manifest['platforms'] as Map<String, dynamic>?) ?? {};
     return UpdateInfo(
       latestVersion: manifest['latestVersion'] as String,
-      latestBuild: manifest['latestBuild'] as int,
+      latestVersionCode: manifest['latestVersionCode'] as int,
       android: platforms['android'] != null
           ? PlatformUpdateInfo.fromJson(platforms['android'] as Map<String, dynamic>)
           : null,

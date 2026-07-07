@@ -11,7 +11,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   String _version = '';
-  int _build = 0;
+  int _versionCode = 0;
   bool _checking = false;
 
   @override
@@ -22,11 +22,11 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> _loadVersion() async {
     final v = await UpdateService.instance.getLocalVersion();
-    final b = await UpdateService.instance.getLocalBuild();
+    final c = await UpdateService.instance.getLocalVersionCode();
     if (!mounted) return;
     setState(() {
       _version = v;
-      _build = b;
+      _versionCode = c;
     });
   }
 
@@ -38,12 +38,12 @@ class _SettingsPageState extends State<SettingsPage> {
       if (!mounted) return;
       if (info == null) {
         final rv = UpdateService.instance.lastRemoteVersion;
-        final rb = UpdateService.instance.lastRemoteBuild;
+        final rc = UpdateService.instance.lastRemoteVersionCode;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(rv.isEmpty
                 ? '已是最新版本'
-                : '已是最新版本（本地 build $_build / 远端 $rv build $rb）'),
+                : '已是最新版本（本地 $_version / $rv, code $_versionCode / $rc）'),
           ),
         );
       } else {
@@ -75,7 +75,7 @@ class _SettingsPageState extends State<SettingsPage> {
             leading: const Icon(Icons.info_outline),
             title: const Text('当前版本'),
             trailing: Text(
-              _version.isEmpty ? '加载中…' : '$_version (build $_build)',
+              _version.isEmpty ? '加载中…' : '$_version ($_versionCode)',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),

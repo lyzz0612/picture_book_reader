@@ -45,16 +45,25 @@ jobs:
 
       - name: Read version
         id: ver
-        # 语义版本来自 pubspec.yaml（手动维护）；构建号用 github.run_number 自增，
-        # 每次 CI 都是唯一递增的，App 据此判断是否需要更新。
+        # 从 pubspec 读取 major.minor（patch 由 CI 用 run_number 覆盖）。
+        # versionName = major.minor.run_number (如 0.1.16)
+        # versionCode = patch + minor×10000 + major×1000000 (如 10016)
+        # App 端 PackageInfo.version → versionName，PackageInfo.buildNumber → versionCode
         run: |
-          APP_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
-          echo "app_version=$APP_VERSION" >> $GITHUB_OUTPUT
-          echo "build_number=${{ github.run_number }}" >> $GITHUB_OUTPUT
+          PUBSPEC_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
+          MAJOR=$(echo "$PUBSPEC_VERSION" | cut -d '.' -f 1)
+          MINOR=$(echo "$PUBSPEC_VERSION" | cut -d '.' -f 2)
+          RUN_NUMBER=${{ github.run_number }}
+          VERSION_NAME="${MAJOR}.${MINOR}.${RUN_NUMBER}"
+          VERSION_CODE=$((RUN_NUMBER + MINOR * 10000 + MAJOR * 1000000))
+          echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
+          echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
 
       - name: Build release APK (split per abi)
-        # --build-number 覆盖 pubspec 中的构建号，使 PackageInfo 反映 CI 构建号
-        run: flutter build apk --release --split-per-abi --build-number=${{ steps.ver.outputs.build_number }}
+        # --build-name 设 versionName，--build-number 设 versionCode
+        run: flutter build apk --release --split-per-abi \
+          --build-name=${{ steps.ver.outputs.version_name }} \
+          --build-number=${{ steps.ver.outputs.version_code }}
 
       - name: Stage APK (fixed filename)
         # 文件名固定为 app-release.apk，R2 对象 key 固定覆盖；版本区分交给下载 URL 的 ?v= 查询串
@@ -69,7 +78,7 @@ jobs:
 
       - name: Show version
         run: |
-          echo "Built version ${{ steps.ver.outputs.app_version }}+${{ steps.ver.outputs.build_number }}"
+          echo "Built version ${{ steps.ver.outputs.version_name }} (code ${{ steps.ver.outputs.version_code }})"
 
   publish:
     needs: build
@@ -86,9 +95,14 @@ jobs:
       - name: Read version & build number
         id: ver
         run: |
-          APP_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
-          echo "app_version=$APP_VERSION" >> $GITHUB_OUTPUT
-          echo "build_number=${{ github.run_number }}" >> $GITHUB_OUTPUT
+          PUBSPEC_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
+          MAJOR=$(echo "$PUBSPEC_VERSION" | cut -d '.' -f 1)
+          MINOR=$(echo "$PUBSPEC_VERSION" | cut -d '.' -f 2)
+          RUN_NUMBER=${{ github.run_number }}
+          VERSION_NAME="${MAJOR}.${MINOR}.${RUN_NUMBER}"
+          VERSION_CODE=$((RUN_NUMBER + MINOR * 10000 + MAJOR * 1000000))
+          echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
+          echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
 
       - name: Configure AWS CLI for Cloudflare R2
         env:
@@ -122,8 +136,8 @@ jobs:
         run: |
           chmod +x scripts/generate_manifest.sh
           ./scripts/generate_manifest.sh \
-            "${{ steps.ver.outputs.app_version }}" \
-            "${{ steps.ver.outputs.build_number }}"
+            "${{ steps.ver.outputs.version_name }}" \
+            "${{ steps.ver.outputs.version_code }}"
 
       - name: Upload manifest.json to R2 (no-cache)
         # manifest.json 必须始终最新，App 每次启动都要能拿到最新版本号，

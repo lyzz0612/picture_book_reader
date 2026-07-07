@@ -23,16 +23,16 @@ class UpdateService {
   static const MethodChannel _installerChannel = MethodChannel('app.installer');
 
   String _localVersion = '0.0.0';
-  int _localBuild = 0;
+  int _localVersionCode = 0;
   String _lastRemoteVersion = '';
-  int _lastRemoteBuild = 0;
+  int _lastRemoteVersionCode = 0;
   bool _initialized = false;
 
   Future<void> _ensureInit() async {
     if (_initialized) return;
     final info = await PackageInfo.fromPlatform();
     _localVersion = info.version;
-    _localBuild = int.tryParse(info.buildNumber) ?? 0;
+    _localVersionCode = int.tryParse(info.buildNumber) ?? 0;
     _initialized = true;
   }
 
@@ -41,17 +41,17 @@ class UpdateService {
     return _localVersion;
   }
 
-  Future<int> getLocalBuild() async {
+  Future<int> getLocalVersionCode() async {
     await _ensureInit();
-    return _localBuild;
+    return _localVersionCode;
   }
 
   String get lastRemoteVersion => _lastRemoteVersion;
-  int get lastRemoteBuild => _lastRemoteBuild;
+  int get lastRemoteVersionCode => _lastRemoteVersionCode;
 
   Future<UpdateInfo?> checkForUpdate() async {
     await _ensureInit();
-    debugPrint('[Update] local: version=$_localVersion build=$_localBuild');
+    debugPrint('[Update] local: version=$_localVersion code=$_localVersionCode');
     debugPrint('[Update] request: ${AppConstants.manifestUrl}');
     final response = await http
         .get(Uri.parse(AppConstants.manifestUrl))
@@ -63,26 +63,22 @@ class UpdateService {
     }
     final manifest = jsonDecode(response.body) as Map<String, dynamic>;
 
-    final remoteVersion = manifest['latestVersion'] as String;
-    final remoteBuild = manifest['latestBuild'] as int;
-    _lastRemoteVersion = remoteVersion;
-    _lastRemoteBuild = remoteBuild;
-    debugPrint('[Update] remote: version=$remoteVersion build=$remoteBuild');
+    final info = UpdateInfo.fromManifest(manifest);
+    _lastRemoteVersion = info.latestVersion;
+    _lastRemoteVersionCode = info.latestVersionCode;
+    debugPrint('[Update] remote: version=${info.latestVersion} '
+        'code=${info.latestVersionCode}');
 
-    // build 号是 CI 单调递增的"新版本"主指标；version 升级也触发。
-    // 不再要求 version 必须相等才比较 build，避免 version 字段不一致时漏判。
-    final hasNewVersion = remoteBuild > _localBuild ||
-        _compareVersion(remoteVersion, _localVersion) > 0;
+    // versionCode 是单调递增的整数，直接比较即可判断是否有新版本
+    final hasNewVersion = info.latestVersionCode > _localVersionCode;
     debugPrint('[Update] hasNewVersion=$hasNewVersion');
-    if (hasNewVersion) {
-      return UpdateInfo.fromManifest(manifest);
-    }
-    return null;
+    return hasNewVersion ? info : null;
   }
 
   Future<bool> isForceUpdateRequired(UpdateInfo info) async {
     await _ensureInit();
-    return _compareVersion(info.minRequiredVersion, _localVersion) > 0;
+    final minRequiredCode = _computeVersionCode(info.minRequiredVersion);
+    return minRequiredCode > _localVersionCode;
   }
 
   Future<void> downloadAndInstall(
@@ -96,7 +92,7 @@ class UpdateService {
 
     final dir = await getTemporaryDirectory();
     final filePath =
-        '${dir.path}/app-release-${info.latestVersion}-build${info.latestBuild}.apk';
+        '${dir.path}/app-release-${info.latestVersion}-${info.latestVersionCode}.apk';
 
     await _downloadFile(platformInfo.url, filePath, onProgress: onProgress);
 
@@ -152,14 +148,13 @@ class UpdateService {
     }
   }
 
-  int _compareVersion(String a, String b) {
-    final pa = a.split('.').map(int.tryParse).whereType<int>().toList();
-    final pb = b.split('.').map(int.tryParse).whereType<int>().toList();
-    for (var i = 0; i < 3; i++) {
-      final va = i < pa.length ? pa[i] : 0;
-      final vb = i < pb.length ? pb[i] : 0;
-      if (va != vb) return va - vb;
-    }
-    return 0;
+  /// versionCode 计算公式: patch + minor×10000 + major×1000000
+  /// 例: "0.1.16" → 16 + 1×10000 + 0×1000000 = 10016
+  int _computeVersionCode(String versionName) {
+    final parts = versionName.split('.').map(int.tryParse).whereType<int>().toList();
+    final major = parts.isNotEmpty ? parts[0] : 0;
+    final minor = parts.length > 1 ? parts[1] : 0;
+    final patch = parts.length > 2 ? parts[2] : 0;
+    return patch + minor * 10000 + major * 1000000;
   }
 }
