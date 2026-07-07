@@ -61,9 +61,9 @@ jobs:
 
       - name: Build release APK (split per abi)
         # --build-name 设 versionName，--build-number 设 versionCode
-        run: flutter build apk --release --split-per-abi \
-          --build-name=${{ steps.ver.outputs.version_name }} \
-          --build-number=${{ steps.ver.outputs.version_code }}
+        # 注意：不用反斜杠续行，GitHub Actions bash 对续行处理不稳，
+        # 会把 "--build-name=xxx " 带前导空格当成 target 文件参数。
+        run: flutter build apk --release --split-per-abi --build-name=${{ steps.ver.outputs.version_name }} --build-number=${{ steps.ver.outputs.version_code }}
 
       - name: Stage APK (fixed filename)
         # 文件名固定为 app-release.apk，R2 对象 key 固定覆盖；版本区分交给下载 URL 的 ?v= 查询串

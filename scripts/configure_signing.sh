@@ -102,3 +102,12 @@ else:
 io.open(path, "w", encoding="utf-8").write(src)
 print("已注入 release 签名配置")
 PY
+
+# 强制校验：注入后 build.gradle 必须包含 release 签名引用，
+# 否则 CI 会静默用 debug 签名 → 每次签名不一致 → Android 拒绝覆盖安装。
+if ! grep -q "signingConfig signingConfigs.release" "$GRADLE"; then
+  echo "ERROR: 注入后未在 $GRADLE 找到 'signingConfig signingConfigs.release'" >&2
+  echo "release 构建将落到 debug 签名，签名不一致会阻断自动更新通道" >&2
+  exit 1
+fi
+echo "OK: release 签名配置已正确注入"
