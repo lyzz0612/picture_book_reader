@@ -9,7 +9,17 @@ class ModeSelectPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('绘本阅读')),
+      appBar: AppBar(
+        title: const Text('绘本阅读'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            tooltip: '设置',
+            onPressed: () =>
+                Navigator.pushNamed(context, AppRouter.settings),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
