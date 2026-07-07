@@ -3,7 +3,7 @@
 > 创建日期：2026-07-03
 > 仓库：lyzz0612/picture_book_reader
 > 技术栈：Flutter
-> 目标平台：iOS / Android（手机 + 平板）
+> 目标平台：**Android 优先，iOS 不在 MVP 考虑范围内**（自动更新、CI/CD、签名等流程仅针对 Android，iOS 后续如需支持需单独规划）
 
 ---
 
@@ -27,7 +27,7 @@ MVP 阶段内容全部内置，无后端服务，纯客户端运行。
 | 后端服务 | 无 | 账号体系、云同步 |
 | 自动更新 | 有（框架阶段即实现） | — |
 | 交互动画 | 基础翻页 + 文字切换 | 语音伴读、交互式元素 |
-| 平台 | iOS + Android（手机 + 平板） | — |
+| 平台 | **Android**（手机 + 平板） | iOS（暂不考虑，后续单独规划） |
 
 ---
 
@@ -386,10 +386,10 @@ class UpdateService {
 
 **Android 安装**：下载 APK 后通过 `Intent` 调用系统包安装器，需在 `AndroidManifest.xml` 中配置 `REQUEST_INSTALL_PACKAGES` 权限和 `FileProvider`。
 
-**iOS 更新**：iOS 无法像 Android 那样直接侧载 IPA。两种方案：
+**iOS 更新（已排除）**：iOS 不在 MVP 范围。后续如需支持 iOS 更新，可参考以下方案：
 - 方案 A：通过 TestFlight 分发（需要 Apple Developer 账号）
 - 方案 B：企业证书 + OTA 分发（需企业账号）
-- 方案 C（MVP 推荐）：iOS 先在模拟器/真机调试，自动更新功能先只做 Android，iOS 走 App Store/TestFlight
+- 方案 C：iOS 走 App Store / TestFlight，自动更新通道不实现
 
 ### 6.5 版本号规则
 

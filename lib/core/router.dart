@@ -16,18 +16,18 @@ class AppRouter {
   static const String pictureReader = '/picture-reader';
   static const String settings = '/settings';
 
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
+  static Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
+    switch (routeSettings.name) {
       case modeSelect:
         return MaterialPageRoute(builder: (_) => const ModeSelectPage());
       case bookshelf:
-        final mode = settings.arguments as BookMode;
+        final mode = routeSettings.arguments as BookMode;
         return MaterialPageRoute(builder: (_) => BookshelfPage(mode: mode));
       case textReader:
-        final book = settings.arguments as Book;
+        final book = routeSettings.arguments as Book;
         return MaterialPageRoute(builder: (_) => TextReaderPage(book: book));
       case pictureReader:
-        final book = settings.arguments as Book;
+        final book = routeSettings.arguments as Book;
         return MaterialPageRoute(builder: (_) => PictureReaderPage(book: book));
       case settings:
         return MaterialPageRoute(builder: (_) => const SettingsPage());
