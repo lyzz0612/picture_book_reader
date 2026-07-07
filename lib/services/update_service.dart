@@ -24,6 +24,8 @@ class UpdateService {
 
   String _localVersion = '0.0.0';
   int _localBuild = 0;
+  String _lastRemoteVersion = '';
+  int _lastRemoteBuild = 0;
   bool _initialized = false;
 
   Future<void> _ensureInit() async {
@@ -44,6 +46,9 @@ class UpdateService {
     return _localBuild;
   }
 
+  String get lastRemoteVersion => _lastRemoteVersion;
+  int get lastRemoteBuild => _lastRemoteBuild;
+
   Future<UpdateInfo?> checkForUpdate() async {
     await _ensureInit();
     debugPrint('[Update] local: version=$_localVersion build=$_localBuild');
@@ -60,10 +65,14 @@ class UpdateService {
 
     final remoteVersion = manifest['latestVersion'] as String;
     final remoteBuild = manifest['latestBuild'] as int;
+    _lastRemoteVersion = remoteVersion;
+    _lastRemoteBuild = remoteBuild;
     debugPrint('[Update] remote: version=$remoteVersion build=$remoteBuild');
 
-    final hasNewVersion = _compareVersion(remoteVersion, _localVersion) > 0 ||
-        (remoteVersion == _localVersion && remoteBuild > _localBuild);
+    // build 号是 CI 单调递增的"新版本"主指标；version 升级也触发。
+    // 不再要求 version 必须相等才比较 build，避免 version 字段不一致时漏判。
+    final hasNewVersion = remoteBuild > _localBuild ||
+        _compareVersion(remoteVersion, _localVersion) > 0;
     debugPrint('[Update] hasNewVersion=$hasNewVersion');
     if (hasNewVersion) {
       return UpdateInfo.fromManifest(manifest);

@@ -37,8 +37,14 @@ class _SettingsPageState extends State<SettingsPage> {
       final info = await UpdateService.instance.checkForUpdate();
       if (!mounted) return;
       if (info == null) {
+        final rv = UpdateService.instance.lastRemoteVersion;
+        final rb = UpdateService.instance.lastRemoteBuild;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('已是最新版本')),
+          SnackBar(
+            content: Text(rv.isEmpty
+                ? '已是最新版本'
+                : '已是最新版本（本地 build $_build / 远端 $rv build $rb）'),
+          ),
         );
       } else {
         final force = await UpdateService.instance.isForceUpdateRequired(info);
