@@ -43,6 +43,11 @@ app.*.map.json
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
 *.jks
+# 本项目为自分发 MVP 特意提交固定 debug 级签名，使 CI 产物签名一致可覆盖安装更新。
+# 仅放行这两个具体文件，其余 .jks / key.properties 仍被忽略。
+# 切换为正式 release key 时：删掉下面两行 + 删除已提交的 release.jks，改用 CI secrets。
+!android/key.properties
+!android/app/release.jks
 
 # CI 生成的产物（不应入库）
 manifest.json

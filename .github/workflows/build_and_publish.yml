@@ -36,30 +36,35 @@ jobs:
                           android/app/src/main/kotlin/com/example/picture_book_reader/MainActivity.kt
           sed -i 's/org.jetbrains.kotlin.android" version "[^"]*"/org.jetbrains.kotlin.android" version "1.9.24"/' android/settings.gradle
           sed -i 's/ext.kotlin_version = "[^"]*"/ext.kotlin_version = "1.9.24"/' android/build.gradle
+          # 注入固定 release 签名（读取已提交的 key.properties + release.jks），
+          # 保证每次 CI 产物签名一致，Android 才允许覆盖安装完成自动更新。
+          ./scripts/configure_signing.sh
 
       - name: Flutter dependencies
         run: flutter pub get
 
-      - name: Read version & build number
+      - name: Read version
         id: ver
+        # 语义版本来自 pubspec.yaml（手动维护）；构建号用 github.run_number 自增，
+        # 每次 CI 都是唯一递增的，App 据此判断是否需要更新。
         run: |
           APP_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
-          BUILD_NUMBER=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2)
           echo "app_version=$APP_VERSION" >> $GITHUB_OUTPUT
-          echo "build_number=$BUILD_NUMBER" >> $GITHUB_OUTPUT
+          echo "build_number=${{ github.run_number }}" >> $GITHUB_OUTPUT
 
       - name: Build release APK (split per abi)
-        run: flutter build apk --release --split-per-abi
+        # --build-number 覆盖 pubspec 中的构建号，使 PackageInfo 反映 CI 构建号
+        run: flutter build apk --release --split-per-abi --build-number=${{ steps.ver.outputs.build_number }}
 
-      - name: Rename arm64 APK
+      - name: Stage APK (fixed filename)
+        # 文件名固定为 app-release.apk，R2 对象 key 固定覆盖；版本区分交给下载 URL 的 ?v= 查询串
         run: |
-          mv build/app/outputs/flutter-apk/app-arm64-v8a-release.apk \
-             app-release-${{ steps.ver.outputs.app_version }}-build${{ steps.ver.outputs.build_number }}.apk
+          cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk app-release.apk
 
       - uses: actions/upload-artifact@v4
         with:
           name: apk
-          path: app-release-*.apk
+          path: app-release.apk
           if-no-files-found: error
 
       - name: Show version
@@ -82,9 +87,8 @@ jobs:
         id: ver
         run: |
           APP_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1)
-          BUILD_NUMBER=$(grep '^version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2)
           echo "app_version=$APP_VERSION" >> $GITHUB_OUTPUT
-          echo "build_number=$BUILD_NUMBER" >> $GITHUB_OUTPUT
+          echo "build_number=${{ github.run_number }}" >> $GITHUB_OUTPUT
 
       - name: Configure AWS CLI for Cloudflare R2
         env:
@@ -95,16 +99,20 @@ jobs:
           aws configure set aws_secret_access_key "$R2_SECRET"
           aws configure set region auto
 
-      - name: Upload APK to R2
+      - name: Upload APK to R2 (fixed key, overwrite)
+        # 固定对象 key android/app-release.apk，每次发布覆盖。
+        # Cache-Control immutable：URL 由 manifest 里的 ?v= 查询串区分版本，
+        # 同一查询串对应的二进制永不变，可长期缓存；新版本走新查询串即缓存未命中。
         env:
           R2_ENDPOINT: ${{ secrets.CLOUDFLARE_R2_ENDPOINT }}
           R2_BUCKET: ${{ secrets.CLOUDFLARE_R2_BUCKET }}
           R2_PREFIX: ${{ secrets.R2_PREFIX || 'picture_book_reader' }}
         run: |
-          aws s3 cp app-release-${{ steps.ver.outputs.app_version }}-build${{ steps.ver.outputs.build_number }}.apk \
-            s3://${R2_BUCKET}/${R2_PREFIX}/android/ \
+          aws s3 cp app-release.apk \
+            s3://${R2_BUCKET}/${R2_PREFIX}/android/app-release.apk \
             --endpoint-url "$R2_ENDPOINT" \
-            --checksum-algorithm SHA256
+            --checksum-algorithm SHA256 \
+            --cache-control "public, max-age=31536000, immutable"
 
       - name: Generate manifest.json
         env:
@@ -117,7 +125,9 @@ jobs:
             "${{ steps.ver.outputs.app_version }}" \
             "${{ steps.ver.outputs.build_number }}"
 
-      - name: Upload manifest.json to R2
+      - name: Upload manifest.json to R2 (no-cache)
+        # manifest.json 必须始终最新，App 每次启动都要能拿到最新版本号，
+        # 因此禁用 CDN 缓存（每次回源校验）。
         env:
           R2_ENDPOINT: ${{ secrets.CLOUDFLARE_R2_ENDPOINT }}
           R2_BUCKET: ${{ secrets.CLOUDFLARE_R2_BUCKET }}
@@ -126,7 +136,8 @@ jobs:
           aws s3 cp manifest.json \
             s3://${R2_BUCKET}/${R2_PREFIX}/manifest.json \
             --endpoint-url "$R2_ENDPOINT" \
-            --content-type "application/json"
+            --content-type "application/json" \
+            --cache-control "no-cache"
 
       - name: Manifest preview
         run: cat manifest.json

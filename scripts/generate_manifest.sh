@@ -10,7 +10,12 @@
 #   RELEASE_NOTES         更新说明（可选）
 #   MIN_REQUIRED_VERSION  最低强制更新版本（可选，默认 0.0.1）
 #
-# 依赖: 当前目录存在已重命名的 app-release-<version>-build<build>.apk
+# 依赖: 当前目录存在固定文件名的 app-release.apk
+#
+# 设计：APK 文件名固定为 app-release.apk，每次发布覆盖 R2 同一对象，
+# 避免历史版本堆积。下载 URL 追加 ?v=<version>-<build> 查询串，
+# Cloudflare 按"完整 URL（含查询串）"缓存，新版查询串即缓存未命中 → 拉取最新对象，
+# 旧版查询串各自缓存互不干扰，从而在固定文件名下保证 CDN 缓存正确性。
 set -euo pipefail
 
 APP_VERSION="${1:?usage: generate_manifest.sh <version> <build_number>}"
@@ -22,7 +27,8 @@ CDN_BASE="${CDN_BASE%/}"
 RELEASE_NOTES="${RELEASE_NOTES:-新版本已发布}"
 MIN_REQUIRED_VERSION="${MIN_REQUIRED_VERSION:-0.0.1}"
 
-APK_NAME="app-release-${APP_VERSION}-build${BUILD_NUMBER}.apk"
+# 固定文件名（CI 上传到 R2 的对象 key 也固定为 android/app-release.apk）
+APK_NAME="app-release.apk"
 APK_PATH="${APK_NAME}"
 
 if [[ ! -f "$APK_PATH" ]]; then
@@ -41,13 +47,16 @@ fi
 # 转义 release notes 中的双引号与反斜杠，避免破坏 JSON
 ESC_NOTES=$(printf '%s' "$RELEASE_NOTES" | sed 's/\\/\\\\/g; s/"/\\"/g')
 
+# 下载 URL：固定路径 + 查询串区分版本（CDN 缓存键 = 完整 URL）
+DOWNLOAD_URL="${CDN_BASE}/android/${APK_NAME}?v=${APP_VERSION}-${BUILD_NUMBER}"
+
 cat > manifest.json <<EOF
 {
   "latestVersion": "${APP_VERSION}",
   "latestBuild": ${BUILD_NUMBER},
   "platforms": {
     "android": {
-      "url": "${CDN_BASE}/android/${APK_NAME}",
+      "url": "${DOWNLOAD_URL}",
       "sha256": "${SHA256}",
       "sizeBytes": ${SIZE}
     }
