@@ -8,13 +8,6 @@
       "metaPath": "books/book_001/meta.json"
     },
     {
-      "id": "book_002",
-      "title": "睡前故事集",
-      "mode": "textOnly",
-      "coverPath": "",
-      "metaPath": "books/book_002/meta.json"
-    },
-    {
       "id": "book_003",
       "title": "三只小猪",
       "mode": "textOnly",
