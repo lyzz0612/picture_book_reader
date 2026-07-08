@@ -10,6 +10,7 @@ class BookIndexEntry {
   final String coverPath; // 相对 assets 的封面路径（空字符串表示无封面，用占位图）
   final String metaPath; // 相对 assets 的 meta.json 路径
   final int? estimatedMinutes; // 预计阅读时长（分钟），用于列表项展示
+  final BookCategory? category; // 分类（仅文字版有意义）
 
   const BookIndexEntry({
     required this.id,
@@ -18,6 +19,7 @@ class BookIndexEntry {
     required this.coverPath,
     required this.metaPath,
     this.estimatedMinutes,
+    this.category,
   });
 
   factory BookIndexEntry.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,9 @@ class BookIndexEntry {
       coverPath: (json['coverPath'] as String?) ?? '',
       metaPath: json['metaPath'] as String,
       estimatedMinutes: json['estimatedMinutes'] as int?,
+      category: (json['category'] as String?) != null
+          ? BookCategory.fromString(json['category'] as String)
+          : null,
     );
   }
 }

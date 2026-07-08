@@ -14,7 +14,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_003/meta.json",
-      "estimatedMinutes": 8
+      "estimatedMinutes": 8,
+      "category": "animal"
     },
     {
       "id": "book_004",
@@ -22,7 +23,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_004/meta.json",
-      "estimatedMinutes": 7
+      "estimatedMinutes": 7,
+      "category": "animal"
     },
     {
       "id": "book_005",
@@ -30,7 +32,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_005/meta.json",
-      "estimatedMinutes": 10
+      "estimatedMinutes": 10,
+      "category": "foreignFable"
     },
     {
       "id": "book_006",
@@ -38,7 +41,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_006/meta.json",
-      "estimatedMinutes": 11
+      "estimatedMinutes": 11,
+      "category": "foreignFable"
     },
     {
       "id": "book_007",
@@ -46,7 +50,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_007/meta.json",
-      "estimatedMinutes": 9
+      "estimatedMinutes": 9,
+      "category": "foreignFable"
     },
     {
       "id": "book_008",
@@ -54,7 +59,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_008/meta.json",
-      "estimatedMinutes": 10
+      "estimatedMinutes": 10,
+      "category": "animal"
     },
     {
       "id": "book_009",
@@ -62,7 +68,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_009/meta.json",
-      "estimatedMinutes": 9
+      "estimatedMinutes": 9,
+      "category": "animal"
     },
     {
       "id": "book_010",
@@ -70,7 +77,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_010/meta.json",
-      "estimatedMinutes": 8
+      "estimatedMinutes": 8,
+      "category": "foreignFable"
     },
     {
       "id": "book_011",
@@ -78,7 +86,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_011/meta.json",
-      "estimatedMinutes": 10
+      "estimatedMinutes": 10,
+      "category": "chineseFable"
     },
     {
       "id": "book_012",
@@ -86,7 +95,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_012/meta.json",
-      "estimatedMinutes": 9
+      "estimatedMinutes": 9,
+      "category": "chineseFable"
     },
     {
       "id": "book_013",
@@ -94,7 +104,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_013/meta.json",
-      "estimatedMinutes": 7
+      "estimatedMinutes": 7,
+      "category": "idiom"
     },
     {
       "id": "book_014",
@@ -102,7 +113,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_014/meta.json",
-      "estimatedMinutes": 7
+      "estimatedMinutes": 7,
+      "category": "idiom"
     },
     {
       "id": "book_015",
@@ -110,7 +122,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_015/meta.json",
-      "estimatedMinutes": 7
+      "estimatedMinutes": 7,
+      "category": "animal"
     },
     {
       "id": "book_016",
@@ -118,7 +131,8 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_016/meta.json",
-      "estimatedMinutes": 8
+      "estimatedMinutes": 8,
+      "category": "animal"
     },
     {
       "id": "book_017",
@@ -126,7 +140,62 @@
       "mode": "textOnly",
       "coverPath": "",
       "metaPath": "books/book_017/meta.json",
-      "estimatedMinutes": 7
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_018",
+      "title": "小马过河",
+      "mode": "textOnly",
+      "coverPath": "",
+      "metaPath": "books/book_018/meta.json",
+      "estimatedMinutes": 7,
+      "category": "animal"
+    },
+    {
+      "id": "book_019",
+      "title": "乌鸦喝水",
+      "mode": "textOnly",
+      "coverPath": "",
+      "metaPath": "books/book_019/meta.json",
+      "estimatedMinutes": 5,
+      "category": "animal"
+    },
+    {
+      "id": "book_020",
+      "title": "狐狸和乌鸦",
+      "mode": "textOnly",
+      "coverPath": "",
+      "metaPath": "books/book_020/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
+    },
+    {
+      "id": "book_021",
+      "title": "狼和小羊",
+      "mode": "textOnly",
+      "coverPath": "",
+      "metaPath": "books/book_021/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
+    },
+    {
+      "id": "book_022",
+      "title": "小猫钓鱼",
+      "mode": "textOnly",
+      "coverPath": "",
+      "metaPath": "books/book_022/meta.json",
+      "estimatedMinutes": 7,
+      "category": "animal"
+    },
+    {
+      "id": "book_023",
+      "title": "蚂蚁和蝈蝈",
+      "mode": "textOnly",
+      "coverPath": "",
+      "metaPath": "books/book_023/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
     }
   ]
 }

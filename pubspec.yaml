@@ -33,7 +33,6 @@ flutter:
   assets:
     - assets/books/index.json
     - assets/books/book_001/
-    - assets/books/book_002/
     - assets/books/book_003/
     - assets/books/book_004/
     - assets/books/book_005/
@@ -49,3 +48,9 @@ flutter:
     - assets/books/book_015/
     - assets/books/book_016/
     - assets/books/book_017/
+    - assets/books/book_018/
+    - assets/books/book_019/
+    - assets/books/book_020/
+    - assets/books/book_021/
+    - assets/books/book_022/
+    - assets/books/book_023/
