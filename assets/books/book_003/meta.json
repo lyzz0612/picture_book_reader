@@ -1,7 +1,7 @@
 {
   "id": "book_003",
   "title": "三只小猪",
-  "coverPath": "",
+  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20three%20pigs%20building%20brick%20house%2C%20children%27s%20picture%20book%20style%2C%20warm%20colors&image_size=square",
   "mode": "textOnly",
   "estimatedMinutes": 8,
   "pages": [

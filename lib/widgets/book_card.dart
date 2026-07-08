@@ -26,13 +26,7 @@ class BookCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: coverPath != null && coverPath!.isNotEmpty
-                  ? Image.asset(
-                      'assets/$coverPath',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => _placeholder(),
-                    )
-                  : _placeholder(),
+              child: _buildCover(),
             ),
             Padding(
               padding: const EdgeInsets.all(10),
@@ -79,6 +73,28 @@ class BookCard extends StatelessWidget {
           ],
         ),
       );
+
+  Widget _buildCover() {
+    if (coverPath == null || coverPath!.isEmpty) {
+      return _placeholder();
+    }
+    if (coverPath!.startsWith('http://') || coverPath!.startsWith('https://')) {
+      return Image.network(
+        coverPath!,
+        fit: BoxFit.cover,
+        loadingBuilder: (_, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return _placeholder();
+        },
+        errorBuilder: (_, __, ___) => _placeholder(),
+      );
+    }
+    return Image.asset(
+      'assets/$coverPath',
+      fit: BoxFit.cover,
+      errorBuilder: (_, __, ___) => _placeholder(),
+    );
+  }
 
   Widget _placeholder() => Container(
         decoration: BoxDecoration(

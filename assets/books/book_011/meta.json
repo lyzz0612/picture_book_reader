@@ -1,7 +1,7 @@
 {
   "id": "book_011",
   "title": "牛郎织女",
-  "coverPath": "",
+  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=chinese%20legend%20cowherd%20and%20weaver%20girl%20meeting%20on%20bridge%2C%20dreamy%20style&image_size=square",
   "mode": "textOnly",
   "estimatedMinutes": 10,
   "pages": [

@@ -1,7 +1,7 @@
 {
   "id": "book_010",
   "title": "狼来了",
-  "coverPath": "",
+  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=shepherd%20boy%20with%20sheep%20and%20wolf%20in%20distance%2C%20children%27s%20picture%20book%20style&image_size=square",
   "mode": "textOnly",
   "estimatedMinutes": 8,
   "pages": [

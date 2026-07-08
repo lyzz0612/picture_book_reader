@@ -1,7 +1,7 @@
 {
   "id": "book_017",
   "title": "坐井观天",
-  "coverPath": "",
+  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=frog%20in%20well%20looking%20at%20sky%2C%20children%27s%20picture%20book%20style&image_size=square",
   "mode": "textOnly",
   "estimatedMinutes": 7,
   "pages": [

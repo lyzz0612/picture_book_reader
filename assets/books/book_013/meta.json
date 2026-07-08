@@ -1,7 +1,7 @@
 {
   "id": "book_013",
   "title": "猴子捞月",
-  "coverPath": "",
+  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=monkeys%20forming%20chain%20to%20catch%20moon%20reflection%2C%20children%27s%20picture%20book&image_size=square",
   "mode": "textOnly",
   "estimatedMinutes": 7,
   "pages": [

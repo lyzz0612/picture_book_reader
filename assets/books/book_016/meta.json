@@ -1,7 +1,7 @@
 {
   "id": "book_016",
   "title": "老鼠嫁女儿",
-  "coverPath": "",
+  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mouse%20wedding%20procession%2C%20children%27s%20picture%20book%20style&image_size=square",
   "mode": "textOnly",
   "estimatedMinutes": 8,
   "pages": [
