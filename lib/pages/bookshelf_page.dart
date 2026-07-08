@@ -55,6 +55,8 @@ class _BookshelfPageState extends State<BookshelfPage> {
       BookCategory.chineseFable,
       BookCategory.foreignFable,
       BookCategory.idiom,
+      BookCategory.lifeHabit,
+      BookCategory.sceneExperience,
     ].where((c) => set.contains(c)).toList();
   }
 
