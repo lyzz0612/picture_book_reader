@@ -15,6 +15,9 @@ class PictureReaderPage extends StatefulWidget {
 class _PictureReaderPageState extends State<PictureReaderPage> {
   int _pageIndex = 0;
   int _segmentIndex = 0;
+  // 切换方向：1 = 前进（下一段/下一页），-1 = 后退（上一段/上一页）
+  int _segmentDirection = 1;
+  int _pageDirection = 1;
 
   model.Page get _currentPage => widget.book.pages[_pageIndex];
   bool get _isFirstPage => _pageIndex == 0;
@@ -23,16 +26,28 @@ class _PictureReaderPageState extends State<PictureReaderPage> {
   bool get _isLastSegment => _segmentIndex == _currentPage.segments.length - 1;
 
   void _nextSegment() {
-    if (!_isLastSegment) setState(() => _segmentIndex++);
+    if (!_isLastSegment) {
+      setState(() {
+        _segmentDirection = 1;
+        _segmentIndex++;
+      });
+    }
   }
 
   void _prevSegment() {
-    if (!_isFirstSegment) setState(() => _segmentIndex--);
+    if (!_isFirstSegment) {
+      setState(() {
+        _segmentDirection = -1;
+        _segmentIndex--;
+      });
+    }
   }
 
   void _nextPage() {
     if (!_isLastPage) {
       setState(() {
+        _pageDirection = 1;
+        _segmentDirection = 1;
         _pageIndex++;
         _segmentIndex = 0;
       });
@@ -44,6 +59,8 @@ class _PictureReaderPageState extends State<PictureReaderPage> {
   void _prevPage() {
     if (!_isFirstPage) {
       setState(() {
+        _pageDirection = -1;
+        _segmentDirection = 1;
         _pageIndex--;
         _segmentIndex = 0;
       });
@@ -105,7 +122,25 @@ class _PictureReaderPageState extends State<PictureReaderPage> {
               }
             },
             child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 250),
+              duration: const Duration(milliseconds: 280),
+              switchInCurve: Curves.easeOutCubic,
+              switchOutCurve: Curves.easeInCubic,
+              transitionBuilder: (child, anim) {
+                final inOffset = Offset(_pageDirection.toDouble(), 0);
+                return SlideTransition(
+                  position: Tween<Offset>(
+                    begin: inOffset,
+                    end: Offset.zero,
+                  ).animate(anim),
+                  child: SlideTransition(
+                    position: Tween<Offset>(
+                      begin: Offset.zero,
+                      end: Offset(-_pageDirection.toDouble(), 0),
+                    ).animate(anim),
+                    child: child,
+                  ),
+                );
+              },
               child: KeyedSubtree(
                 key: ValueKey(_currentPage.id),
                 child: _currentPage.imagePath != null
@@ -152,7 +187,26 @@ class _PictureReaderPageState extends State<PictureReaderPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 200),
+                        duration: const Duration(milliseconds: 240),
+                        switchInCurve: Curves.easeOutCubic,
+                        switchOutCurve: Curves.easeInCubic,
+                        transitionBuilder: (child, anim) {
+                          final inOffset =
+                              Offset(_segmentDirection.toDouble(), 0);
+                          return SlideTransition(
+                            position: Tween<Offset>(
+                              begin: inOffset,
+                              end: Offset.zero,
+                            ).animate(anim),
+                            child: SlideTransition(
+                              position: Tween<Offset>(
+                                begin: Offset.zero,
+                                end: Offset(-_segmentDirection.toDouble(), 0),
+                              ).animate(anim),
+                              child: child,
+                            ),
+                          );
+                        },
                         child: TextSegmentView(
                           key: ValueKey(
                               '${_currentPage.id}-$_segmentIndex'),
