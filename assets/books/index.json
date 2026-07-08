@@ -5,112 +5,128 @@
       "title": "小兔子的冒险",
       "mode": "pictureBook",
       "coverPath": "books/book_001/cover.png",
-      "metaPath": "books/book_001/meta.json"
+      "metaPath": "books/book_001/meta.json",
+      "estimatedMinutes": 5
     },
     {
       "id": "book_003",
       "title": "三只小猪",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_003/meta.json"
+      "metaPath": "books/book_003/meta.json",
+      "estimatedMinutes": 8
     },
     {
       "id": "book_004",
       "title": "龟兔赛跑",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_004/meta.json"
+      "metaPath": "books/book_004/meta.json",
+      "estimatedMinutes": 7
     },
     {
       "id": "book_005",
       "title": "灰姑娘",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_005/meta.json"
+      "metaPath": "books/book_005/meta.json",
+      "estimatedMinutes": 10
     },
     {
       "id": "book_006",
       "title": "白雪公主",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_006/meta.json"
+      "metaPath": "books/book_006/meta.json",
+      "estimatedMinutes": 11
     },
     {
       "id": "book_007",
       "title": "小红帽",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_007/meta.json"
+      "metaPath": "books/book_007/meta.json",
+      "estimatedMinutes": 9
     },
     {
       "id": "book_008",
       "title": "丑小鸭",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_008/meta.json"
+      "metaPath": "books/book_008/meta.json",
+      "estimatedMinutes": 10
     },
     {
       "id": "book_009",
       "title": "青蛙王子",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_009/meta.json"
+      "metaPath": "books/book_009/meta.json",
+      "estimatedMinutes": 9
     },
     {
       "id": "book_010",
       "title": "狼来了",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_010/meta.json"
+      "metaPath": "books/book_010/meta.json",
+      "estimatedMinutes": 8
     },
     {
       "id": "book_011",
       "title": "牛郎织女",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_011/meta.json"
+      "metaPath": "books/book_011/meta.json",
+      "estimatedMinutes": 10
     },
     {
       "id": "book_012",
       "title": "八仙过海",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_012/meta.json"
+      "metaPath": "books/book_012/meta.json",
+      "estimatedMinutes": 9
     },
     {
       "id": "book_013",
       "title": "猴子捞月",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_013/meta.json"
+      "metaPath": "books/book_013/meta.json",
+      "estimatedMinutes": 7
     },
     {
       "id": "book_014",
       "title": "狐假虎威",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_014/meta.json"
+      "metaPath": "books/book_014/meta.json",
+      "estimatedMinutes": 7
     },
     {
       "id": "book_015",
       "title": "拔萝卜",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_015/meta.json"
+      "metaPath": "books/book_015/meta.json",
+      "estimatedMinutes": 7
     },
     {
       "id": "book_016",
       "title": "老鼠嫁女儿",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_016/meta.json"
+      "metaPath": "books/book_016/meta.json",
+      "estimatedMinutes": 8
     },
     {
       "id": "book_017",
       "title": "坐井观天",
       "mode": "textOnly",
       "coverPath": "",
-      "metaPath": "books/book_017/meta.json"
+      "metaPath": "books/book_017/meta.json",
+      "estimatedMinutes": 7
     }
   ]
 }

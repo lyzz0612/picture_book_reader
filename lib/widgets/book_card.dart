@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class BookCard extends StatelessWidget {
   final String title;
   final String? coverPath; // assets 内相对路径，null 显示占位
+  final int? estimatedMinutes; // 预计阅读时长（分钟），非空时在标题下方显示
   final VoidCallback onTap;
 
   const BookCard({
     super.key,
     required this.title,
     this.coverPath,
+    this.estimatedMinutes,
     required this.onTap,
   });
 
@@ -34,11 +36,20 @@ class BookCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Text(
-                title,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.w600),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  if (estimatedMinutes != null) ...[
+                    const SizedBox(height: 4),
+                    _DurationBadge(minutes: estimatedMinutes!),
+                  ],
+                ],
               ),
             ),
           ],
@@ -46,6 +57,28 @@ class BookCard extends StatelessWidget {
       ),
     );
   }
+
+  Widget _DurationBadge({required int minutes}) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+        decoration: BoxDecoration(
+          color: Colors.brown.shade100,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.schedule, size: 12, color: Colors.brown.shade600),
+            const SizedBox(width: 2),
+            Text(
+              '$minutes 分钟',
+              style: TextStyle(
+                fontSize: 11,
+                color: Colors.brown.shade700,
+              ),
+            ),
+          ],
+        ),
+      );
 
   Widget _placeholder() => Container(
         decoration: BoxDecoration(

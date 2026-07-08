@@ -9,6 +9,7 @@ class BookIndexEntry {
   final BookMode mode;
   final String coverPath; // 相对 assets 的封面路径（空字符串表示无封面，用占位图）
   final String metaPath; // 相对 assets 的 meta.json 路径
+  final int? estimatedMinutes; // 预计阅读时长（分钟），用于列表项展示
 
   const BookIndexEntry({
     required this.id,
@@ -16,6 +17,7 @@ class BookIndexEntry {
     required this.mode,
     required this.coverPath,
     required this.metaPath,
+    this.estimatedMinutes,
   });
 
   factory BookIndexEntry.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class BookIndexEntry {
       mode: BookMode.fromString(json['mode'] as String),
       coverPath: (json['coverPath'] as String?) ?? '',
       metaPath: json['metaPath'] as String,
+      estimatedMinutes: json['estimatedMinutes'] as int?,
     );
   }
 }
