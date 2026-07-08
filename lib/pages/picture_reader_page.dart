@@ -104,19 +104,19 @@ class _PictureReaderPageState extends State<PictureReaderPage> {
                 _prevPage();
               }
             },
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                if (_currentPage.imagePath != null)
-                  Image.asset(
-                    'assets/${_currentPage.imagePath}',
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) =>
-                        Container(color: Colors.grey.shade300),
-                  )
-                else
-                  Container(color: Colors.grey.shade200),
-              ],
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              child: KeyedSubtree(
+                key: ValueKey(_currentPage.id),
+                child: _currentPage.imagePath != null
+                    ? Image.asset(
+                        'assets/${_currentPage.imagePath}',
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) =>
+                            Container(color: Colors.grey.shade300),
+                      )
+                    : Container(color: Colors.grey.shade200),
+              ),
             ),
           ),
           Positioned(
@@ -151,22 +151,33 @@ class _PictureReaderPageState extends State<PictureReaderPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      for (int i = 0; i < _currentPage.segments.length; i++)
-                        TextSegmentView(
-                          segment: _currentPage.segments[i],
-                          state: i == _segmentIndex
-                              ? SegmentState.current
-                              : i < _segmentIndex
-                                  ? SegmentState.read
-                                  : SegmentState.unread,
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 200),
+                        child: TextSegmentView(
+                          key: ValueKey(
+                              '${_currentPage.id}-$_segmentIndex'),
+                          segment: _currentPage.segments[_segmentIndex],
+                          state: SegmentState.current,
                         ),
+                      ),
                       const SizedBox(height: 8),
-                      Text(
-                        '文字区左右滑切换文字 · 图片区左右滑翻页',
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.5),
-                          fontSize: 12,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            '文字 ${_segmentIndex + 1}/${_currentPage.segments.length} · 图片 ${_pageIndex + 1}/${widget.book.pages.length}',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.5),
+                              fontSize: 12,
+                            ),
+                          ),
+                          const Spacer(),
+                          if (_currentPage.segments.length > 1)
+                            Icon(
+                              Icons.swap_horiz,
+                              size: 14,
+                              color: Colors.white.withOpacity(0.4),
+                            ),
+                        ],
                       ),
                     ],
                   ),
