@@ -22,7 +22,9 @@ enum BookCategory {
   animal, // 动物拟人
   chineseFable, // 国产寓言
   foreignFable, // 国外寓言
-  idiom; // 成语故事
+  idiom, // 成语故事
+  lifeHabit, // 生活习惯
+  sceneExperience; // 场景体验
 
   static BookCategory fromString(String s) {
     switch (s) {
@@ -34,6 +36,10 @@ enum BookCategory {
         return BookCategory.foreignFable;
       case 'idiom':
         return BookCategory.idiom;
+      case 'lifeHabit':
+        return BookCategory.lifeHabit;
+      case 'sceneExperience':
+        return BookCategory.sceneExperience;
       default:
         throw ArgumentError('Unknown BookCategory: $s');
     }
@@ -45,6 +51,8 @@ enum BookCategory {
         BookCategory.chineseFable => '国产寓言',
         BookCategory.foreignFable => '国外寓言',
         BookCategory.idiom => '成语故事',
+        BookCategory.lifeHabit => '生活习惯',
+        BookCategory.sceneExperience => '场景体验',
       };
 }
 
