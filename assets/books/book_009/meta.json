@@ -1,7 +1,7 @@
 {
   "id": "book_009",
   "title": "青蛙王子",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=frog%20prince%20on%20lily%20pad%2C%20children%27s%20picture%20book%20style%2C%20fairy%20tale&image_size=square",
+  "coverPath": "books/book_009/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 9,
   "pages": [

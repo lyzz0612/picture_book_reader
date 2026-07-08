@@ -1,7 +1,7 @@
 {
   "id": "book_019",
   "title": "乌鸦喝水",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=crow%20dropping%20stones%20into%20bottle%20to%20drink%20water%2C%20children%27s%20picture%20book&image_size=square",
+  "coverPath": "books/book_019/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 5,
   "category": "animal",

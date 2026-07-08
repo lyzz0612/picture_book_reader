@@ -1,7 +1,7 @@
 {
   "id": "book_012",
   "title": "八仙过海",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=eight%20immortals%20crossing%20sea%20on%20magical%20objects%2C%20chinese%20myth%20style&image_size=square",
+  "coverPath": "books/book_012/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 9,
   "pages": [

@@ -1,7 +1,7 @@
 {
   "id": "book_023",
   "title": "蚂蚁和蝈蝈",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=ants%20gathering%20food%20and%20grasshopper%20playing%2C%20children%27s%20picture%20book&image_size=square",
+  "coverPath": "books/book_023/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 6,
   "category": "animal",

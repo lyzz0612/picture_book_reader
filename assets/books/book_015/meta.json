@@ -1,7 +1,7 @@
 {
   "id": "book_015",
   "title": "拔萝卜",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=animals%20pulling%20big%20radish%20together%2C%20children%27s%20picture%20book%20style&image_size=square",
+  "coverPath": "books/book_015/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 7,
   "pages": [

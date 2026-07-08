@@ -1,7 +1,7 @@
 {
   "id": "book_022",
   "title": "小猫钓鱼",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=little%20cat%20fishing%20by%20river%2C%20butterfly%20nearby%2C%20children%27s%20picture%20book&image_size=square",
+  "coverPath": "books/book_022/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 7,
   "category": "animal",

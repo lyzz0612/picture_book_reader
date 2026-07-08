@@ -1,7 +1,7 @@
 {
   "id": "book_005",
   "title": "灰姑娘",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cinderella%20in%20beautiful%20dress%20at%20ball%2C%20children%27s%20picture%20book%20style%2C%20magical&image_size=square",
+  "coverPath": "books/book_005/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 10,
   "pages": [

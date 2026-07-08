@@ -1,7 +1,7 @@
 {
   "id": "book_021",
   "title": "狼和小羊",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=wolf%20and%20lamb%20by%20stream%2C%20children%27s%20picture%20book%20style&image_size=square",
+  "coverPath": "books/book_021/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 6,
   "category": "animal",

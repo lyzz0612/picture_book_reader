@@ -12,7 +12,7 @@
       "id": "book_003",
       "title": "三只小猪",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20three%20pigs%20building%20brick%20house%2C%20children%27s%20picture%20book%20style%2C%20warm%20colors&image_size=square",
+      "coverPath": "books/book_003/cover.png",
       "metaPath": "books/book_003/meta.json",
       "estimatedMinutes": 8,
       "category": "animal"
@@ -21,7 +21,7 @@
       "id": "book_004",
       "title": "龟兔赛跑",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20tortoise%20and%20rabbit%20running%20race%2C%20children%27s%20picture%20book%20style%2C%20green%20grass&image_size=square",
+      "coverPath": "books/book_004/cover.png",
       "metaPath": "books/book_004/meta.json",
       "estimatedMinutes": 7,
       "category": "animal"
@@ -30,7 +30,7 @@
       "id": "book_005",
       "title": "灰姑娘",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cinderella%20in%20beautiful%20dress%20at%20ball%2C%20children%27s%20picture%20book%20style%2C%20magical&image_size=square",
+      "coverPath": "books/book_005/cover.png",
       "metaPath": "books/book_005/meta.json",
       "estimatedMinutes": 10,
       "category": "foreignFable"
@@ -39,7 +39,7 @@
       "id": "book_006",
       "title": "白雪公主",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=snow%20white%20with%20seven%20dwarfs%20in%20forest%2C%20children%27s%20picture%20book%20style&image_size=square",
+      "coverPath": "books/book_006/cover.png",
       "metaPath": "books/book_006/meta.json",
       "estimatedMinutes": 11,
       "category": "foreignFable"
@@ -48,7 +48,7 @@
       "id": "book_007",
       "title": "小红帽",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=little%20red%20riding%20hood%20with%20basket%20in%20forest%2C%20children%27s%20picture%20book%20style&image_size=square",
+      "coverPath": "books/book_007/cover.png",
       "metaPath": "books/book_007/meta.json",
       "estimatedMinutes": 9,
       "category": "foreignFable"
@@ -57,7 +57,7 @@
       "id": "book_008",
       "title": "丑小鸭",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=ugly%20duckling%20swimming%20in%20pond%2C%20children%27s%20picture%20book%20style&image_size=square",
+      "coverPath": "books/book_008/cover.png",
       "metaPath": "books/book_008/meta.json",
       "estimatedMinutes": 10,
       "category": "animal"
@@ -66,7 +66,7 @@
       "id": "book_009",
       "title": "青蛙王子",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=frog%20prince%20on%20lily%20pad%2C%20children%27s%20picture%20book%20style%2C%20fairy%20tale&image_size=square",
+      "coverPath": "books/book_009/cover.png",
       "metaPath": "books/book_009/meta.json",
       "estimatedMinutes": 9,
       "category": "animal"
@@ -75,7 +75,7 @@
       "id": "book_010",
       "title": "狼来了",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=shepherd%20boy%20with%20sheep%20and%20wolf%20in%20distance%2C%20children%27s%20picture%20book%20style&image_size=square",
+      "coverPath": "books/book_010/cover.png",
       "metaPath": "books/book_010/meta.json",
       "estimatedMinutes": 8,
       "category": "foreignFable"
@@ -84,7 +84,7 @@
       "id": "book_011",
       "title": "牛郎织女",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=chinese%20legend%20cowherd%20and%20weaver%20girl%20meeting%20on%20bridge%2C%20dreamy%20style&image_size=square",
+      "coverPath": "books/book_011/cover.png",
       "metaPath": "books/book_011/meta.json",
       "estimatedMinutes": 10,
       "category": "chineseFable"
@@ -93,7 +93,7 @@
       "id": "book_012",
       "title": "八仙过海",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=eight%20immortals%20crossing%20sea%20on%20magical%20objects%2C%20chinese%20myth%20style&image_size=square",
+      "coverPath": "books/book_012/cover.png",
       "metaPath": "books/book_012/meta.json",
       "estimatedMinutes": 9,
       "category": "chineseFable"
@@ -102,7 +102,7 @@
       "id": "book_013",
       "title": "猴子捞月",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=monkeys%20forming%20chain%20to%20catch%20moon%20reflection%2C%20children%27s%20picture%20book&image_size=square",
+      "coverPath": "books/book_013/cover.png",
       "metaPath": "books/book_013/meta.json",
       "estimatedMinutes": 7,
       "category": "idiom"
@@ -111,7 +111,7 @@
       "id": "book_014",
       "title": "狐假虎威",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=fox%20walking%20with%20tiger%20behind%2C%20forest%20scene%2C%20children%27s%20picture%20book&image_size=square",
+      "coverPath": "books/book_014/cover.png",
       "metaPath": "books/book_014/meta.json",
       "estimatedMinutes": 7,
       "category": "idiom"
@@ -120,7 +120,7 @@
       "id": "book_015",
       "title": "拔萝卜",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=animals%20pulling%20big%20radish%20together%2C%20children%27s%20picture%20book%20style&image_size=square",
+      "coverPath": "books/book_015/cover.png",
       "metaPath": "books/book_015/meta.json",
       "estimatedMinutes": 7,
       "category": "animal"
@@ -129,7 +129,7 @@
       "id": "book_016",
       "title": "老鼠嫁女儿",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mouse%20wedding%20procession%2C%20children%27s%20picture%20book%20style&image_size=square",
+      "coverPath": "books/book_016/cover.png",
       "metaPath": "books/book_016/meta.json",
       "estimatedMinutes": 8,
       "category": "animal"
@@ -138,7 +138,7 @@
       "id": "book_017",
       "title": "坐井观天",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=frog%20in%20well%20looking%20at%20sky%2C%20children%27s%20picture%20book%20style&image_size=square",
+      "coverPath": "books/book_017/cover.png",
       "metaPath": "books/book_017/meta.json",
       "estimatedMinutes": 7,
       "category": "idiom"
@@ -147,7 +147,7 @@
       "id": "book_018",
       "title": "小马过河",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=little%20pony%20crossing%20river%2C%20cow%20and%20squirrel%20nearby%2C%20children%27s%20picture%20book&image_size=square",
+      "coverPath": "books/book_018/cover.png",
       "metaPath": "books/book_018/meta.json",
       "estimatedMinutes": 7,
       "category": "animal"
@@ -156,7 +156,7 @@
       "id": "book_019",
       "title": "乌鸦喝水",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=crow%20dropping%20stones%20into%20bottle%20to%20drink%20water%2C%20children%27s%20picture%20book&image_size=square",
+      "coverPath": "books/book_019/cover.png",
       "metaPath": "books/book_019/meta.json",
       "estimatedMinutes": 5,
       "category": "animal"
@@ -165,7 +165,7 @@
       "id": "book_020",
       "title": "狐狸和乌鸦",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=fox%20looking%20at%20crow%20with%20cheese%20in%20tree%2C%20children%27s%20picture%20book&image_size=square",
+      "coverPath": "books/book_020/cover.png",
       "metaPath": "books/book_020/meta.json",
       "estimatedMinutes": 6,
       "category": "animal"
@@ -174,7 +174,7 @@
       "id": "book_021",
       "title": "狼和小羊",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=wolf%20and%20lamb%20by%20stream%2C%20children%27s%20picture%20book%20style&image_size=square",
+      "coverPath": "books/book_021/cover.png",
       "metaPath": "books/book_021/meta.json",
       "estimatedMinutes": 6,
       "category": "animal"
@@ -183,7 +183,7 @@
       "id": "book_022",
       "title": "小猫钓鱼",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=little%20cat%20fishing%20by%20river%2C%20butterfly%20nearby%2C%20children%27s%20picture%20book&image_size=square",
+      "coverPath": "books/book_022/cover.png",
       "metaPath": "books/book_022/meta.json",
       "estimatedMinutes": 7,
       "category": "animal"
@@ -192,7 +192,7 @@
       "id": "book_023",
       "title": "蚂蚁和蝈蝈",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=ants%20gathering%20food%20and%20grasshopper%20playing%2C%20children%27s%20picture%20book&image_size=square",
+      "coverPath": "books/book_023/cover.png",
       "metaPath": "books/book_023/meta.json",
       "estimatedMinutes": 6,
       "category": "animal"
@@ -201,7 +201,7 @@
       "id": "book_024",
       "title": "小熊去动物园",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20bear%20cub%20at%20zoo%20looking%20at%20lion%20and%20elephant%2C%20children%27s%20picture%20book%20style%2C%20bright%20cheerful%20colors&image_size=square",
+      "coverPath": "books/book_024/cover.png",
       "metaPath": "books/book_024/meta.json",
       "estimatedMinutes": 6,
       "category": "sceneExperience"
@@ -210,7 +210,7 @@
       "id": "book_025",
       "title": "小兔逛超市",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20rabbit%20shopping%20in%20supermarket%20with%20mom%2C%20children%27s%20picture%20book%20style%2C%20colorful%20and%20cheerful&image_size=square",
+      "coverPath": "books/book_025/cover.png",
       "metaPath": "books/book_025/meta.json",
       "estimatedMinutes": 6,
       "category": "sceneExperience"
@@ -219,7 +219,7 @@
       "id": "book_026",
       "title": "小猫去公园",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20cat%20playing%20at%20park%20with%20slide%20and%20swing%2C%20children%27s%20picture%20book%20style%2C%20bright%20and%20happy&image_size=square",
+      "coverPath": "books/book_026/cover.png",
       "metaPath": "books/book_026/meta.json",
       "estimatedMinutes": 6,
       "category": "sceneExperience"
@@ -228,7 +228,7 @@
       "id": "book_027",
       "title": "小狗去医院",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20puppy%20at%20vet%20clinic%20with%20friendly%20doctor%2C%20children%27s%20picture%20book%20style%2C%20soft%20pastel%20colors&image_size=square",
+      "coverPath": "books/book_027/cover.png",
       "metaPath": "books/book_027/meta.json",
       "estimatedMinutes": 6,
       "category": "sceneExperience"
@@ -237,7 +237,7 @@
       "id": "book_028",
       "title": "小鸭去幼儿园",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20duckling%20at%20kindergarten%20with%20friends%2C%20children%27s%20picture%20book%20style%2C%20warm%20and%20friendly&image_size=square",
+      "coverPath": "books/book_028/cover.png",
       "metaPath": "books/book_028/meta.json",
       "estimatedMinutes": 6,
       "category": "sceneExperience"
@@ -246,7 +246,7 @@
       "id": "book_029",
       "title": "小象去海边",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20baby%20elephant%20at%20beach%20playing%20with%20sand%20and%20shells%2C%20children%27s%20picture%20book%20style%2C%20blue%20sky%20and%20ocean&image_size=square",
+      "coverPath": "books/book_029/cover.png",
       "metaPath": "books/book_029/meta.json",
       "estimatedMinutes": 6,
       "category": "sceneExperience"
@@ -255,7 +255,7 @@
       "id": "book_030",
       "title": "小松鼠去农场",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20squirrel%20at%20farm%20with%20cows%20and%20chickens%2C%20children%27s%20picture%20book%20style%2C%20green%20pasture&image_size=square",
+      "coverPath": "books/book_030/cover.png",
       "metaPath": "books/book_030/meta.json",
       "estimatedMinutes": 6,
       "category": "sceneExperience"
@@ -264,7 +264,7 @@
       "id": "book_031",
       "title": "小羊去餐厅",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20lamb%20eating%20at%20restaurant%20with%20family%2C%20children%27s%20picture%20book%20style%2C%20cozy%20and%20warm&image_size=square",
+      "coverPath": "books/book_031/cover.png",
       "metaPath": "books/book_031/meta.json",
       "estimatedMinutes": 6,
       "category": "sceneExperience"
@@ -273,7 +273,7 @@
       "id": "book_032",
       "title": "小熊刷牙",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20bear%20brushing%20teeth%20with%20toothbrush%20and%20paste%2C%20children%27s%20picture%20book%20style%2C%20bright%20bathroom&image_size=square",
+      "coverPath": "books/book_032/cover.png",
       "metaPath": "books/book_032/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"
@@ -282,7 +282,7 @@
       "id": "book_033",
       "title": "小兔洗手",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20rabbit%20washing%20hands%20at%20sink%20with%20soap%20bubbles%2C%20children%27s%20picture%20book%20style%2C%20clean%20bright&image_size=square",
+      "coverPath": "books/book_033/cover.png",
       "metaPath": "books/book_033/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"
@@ -291,7 +291,7 @@
       "id": "book_034",
       "title": "小猪吃饭",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pig%20eating%20vegetables%20at%20dinner%20table%2C%20children%27s%20picture%20book%20style%2C%20colorful%20food&image_size=square",
+      "coverPath": "books/book_034/cover.png",
       "metaPath": "books/book_034/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"
@@ -300,7 +300,7 @@
       "id": "book_035",
       "title": "小猫睡觉",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20cat%20sleeping%20in%20bed%20with%20moon%20and%20stars%2C%20children%27s%20picture%20book%20style%2C%20soft%20night&image_size=square",
+      "coverPath": "books/book_035/cover.png",
       "metaPath": "books/book_035/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"
@@ -309,7 +309,7 @@
       "id": "book_036",
       "title": "小狗穿衣",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20puppy%20learning%20to%20dress%20himself%2C%20children%27s%20picture%20book%20style%2C%20colorful%20clothes&image_size=square",
+      "coverPath": "books/book_036/cover.png",
       "metaPath": "books/book_036/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"
@@ -318,7 +318,7 @@
       "id": "book_037",
       "title": "小鸭收玩具",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20duckling%20putting%20toys%20into%20toy%20box%2C%20children%27s%20picture%20book%20style%2C%20organized%20room&image_size=square",
+      "coverPath": "books/book_037/cover.png",
       "metaPath": "books/book_037/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"
@@ -327,7 +327,7 @@
       "id": "book_038",
       "title": "小象打招呼",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20baby%20elephant%20saying%20hello%20to%20friends%2C%20children%27s%20picture%20book%20style%2C%20friendly%20and%20happy&image_size=square",
+      "coverPath": "books/book_038/cover.png",
       "metaPath": "books/book_038/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"
@@ -336,7 +336,7 @@
       "id": "book_039",
       "title": "小龟分享",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20turtle%20sharing%20candy%20with%20friends%2C%20children%27s%20picture%20book%20style%2C%20warm%20and%20friendly&image_size=square",
+      "coverPath": "books/book_039/cover.png",
       "metaPath": "books/book_039/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"
@@ -345,7 +345,7 @@
       "id": "book_040",
       "title": "小松鼠排队",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20squirrel%20waiting%20in%20line%20for%20ice%20cream%2C%20children%27s%20picture%20book%20style%2C%20fun%20and%20colorful&image_size=square",
+      "coverPath": "books/book_040/cover.png",
       "metaPath": "books/book_040/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"
@@ -354,7 +354,7 @@
       "id": "book_041",
       "title": "小羊喝水",
       "mode": "textOnly",
-      "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20lamb%20drinking%20water%20from%20cup%2C%20children%27s%20picture%20book%20style%2C%20fresh%20and%20clean&image_size=square",
+      "coverPath": "books/book_041/cover.png",
       "metaPath": "books/book_041/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"

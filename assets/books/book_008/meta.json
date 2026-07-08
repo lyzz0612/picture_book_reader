@@ -1,7 +1,7 @@
 {
   "id": "book_008",
   "title": "丑小鸭",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=ugly%20duckling%20swimming%20in%20pond%2C%20children%27s%20picture%20book%20style&image_size=square",
+  "coverPath": "books/book_008/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 10,
   "pages": [

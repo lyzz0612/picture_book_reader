@@ -1,7 +1,7 @@
 {
   "id": "book_004",
   "title": "龟兔赛跑",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20tortoise%20and%20rabbit%20running%20race%2C%20children%27s%20picture%20book%20style%2C%20green%20grass&image_size=square",
+  "coverPath": "books/book_004/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 7,
   "pages": [

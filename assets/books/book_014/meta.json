@@ -1,7 +1,7 @@
 {
   "id": "book_014",
   "title": "狐假虎威",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=fox%20walking%20with%20tiger%20behind%2C%20forest%20scene%2C%20children%27s%20picture%20book&image_size=square",
+  "coverPath": "books/book_014/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 7,
   "pages": [

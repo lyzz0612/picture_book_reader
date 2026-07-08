@@ -1,7 +1,7 @@
 {
   "id": "book_018",
   "title": "小马过河",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=little%20pony%20crossing%20river%2C%20cow%20and%20squirrel%20nearby%2C%20children%27s%20picture%20book&image_size=square",
+  "coverPath": "books/book_018/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 7,
   "category": "animal",

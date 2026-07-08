@@ -1,7 +1,7 @@
 {
   "id": "book_020",
   "title": "狐狸和乌鸦",
-  "coverPath": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=fox%20looking%20at%20crow%20with%20cheese%20in%20tree%2C%20children%27s%20picture%20book&image_size=square",
+  "coverPath": "books/book_020/cover.png",
   "mode": "textOnly",
   "estimatedMinutes": 6,
   "category": "animal",
