@@ -54,37 +54,38 @@ jobs:
           echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
           echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
 
-      - name: Build release APK (split per abi)
-        # --build-name 设 versionName，--build-number 设 versionCode
-        # 注意：不用反斜杠续行，GitHub Actions bash 对续行处理不稳，
-        # 会把 "--build-name=xxx " 带前导空格当成 target 文件参数。
-        run: flutter build apk --release --split-per-abi --build-name=${{ steps.ver.outputs.version_name }} --build-number=${{ steps.ver.outputs.version_code }}
+      - name: Build release APK (arm64 only)
+        # 不用 --split-per-abi：该选项会让 Flutter 给不同架构 APK 的 versionCode
+        # 自动加偏移量（arm64 +1000、x86_64 +2000 等），导致 APK 内实际 versionCode
+        # 与 --build-number 传入值不一致，App 端 PackageInfo.buildNumber 拿到的就是
+        # 偏移后的值，与 manifest 里的 latestVersionCode 对不上，更新检测会错乱。
+        # 改用 --target-platform android-arm64 打单一架构 fat APK，versionCode 不偏移。
+        run: flutter build apk --release --target-platform android-arm64 --build-name=${{ steps.ver.outputs.version_name }} --build-number=${{ steps.ver.outputs.version_code }}
 
       - name: Stage APK (fixed filename)
         # 文件名固定为 app-release.apk，R2 对象 key 固定覆盖；版本区分交给下载 URL 的 ?v= 查询串
         run: |
-          cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk app-release.apk
+          cp build/app/outputs/flutter-apk/app-release.apk app-release.apk
 
       - name: Verify APK version
         # 从构建产物读出实际 versionName/versionCode，和计算值比对，不一致则报错中止。
-        # 防止 --build-name/--build-number 没生效，或 CI 模板覆盖了版本号。
+        # 防止 --build-name/--build-number 没生效，或 split-per-abi 偏移导致 versionCode 错乱。
+        # 用 androguard 解析 APK（aapt 在 ubuntu runner 上不一定预装）。
         run: |
-          APK_INFO=$(aapt dump badging app-release.apk 2>/dev/null | grep -E "package:|versionName|versionCode")
-          echo "APK badging:"
-          echo "$APK_INFO"
-          ACTUAL_NAME=$(echo "$APK_INFO" | grep -oP "versionName='\K[^']+")
-          ACTUAL_CODE=$(echo "$APK_INFO" | grep -oP "versionCode='\K[^']+")
-          echo "Expected: versionName=${{ steps.ver.outputs.version_name }} versionCode=${{ steps.ver.outputs.version_code }}"
-          echo "Actual:   versionName=$ACTUAL_NAME versionCode=$ACTUAL_CODE"
-          if [[ "$ACTUAL_NAME" != "${{ steps.ver.outputs.version_name }}" ]]; then
-            echo "ERROR: versionName 不匹配" >&2
-            exit 1
-          fi
-          if [[ "$ACTUAL_CODE" != "${{ steps.ver.outputs.version_code }}" ]]; then
-            echo "ERROR: versionCode 不匹配" >&2
-            exit 1
-          fi
-          echo "OK: APK 版本号与计算值一致"
+          pip install androguard >/dev/null 2>&1
+          python3 -c "
+          from androguard.core.apk import APK
+          a = APK('app-release.apk')
+          actual_name = a.get_androidversion_name()
+          actual_code = a.get_androidversion_code()
+          expected_name = '${{ steps.ver.outputs.version_name }}'
+          expected_code = '${{ steps.ver.outputs.version_code }}'
+          print(f'Expected: versionName={expected_name} versionCode={expected_code}')
+          print(f'Actual:   versionName={actual_name} versionCode={actual_code}')
+          assert actual_name == expected_name, f'versionName 不匹配: {actual_name} != {expected_name}'
+          assert str(actual_code) == expected_code, f'versionCode 不匹配: {actual_code} != {expected_code}'
+          print('OK: APK 版本号与计算值一致')
+          "
 
       - uses: actions/upload-artifact@v4
         with:
