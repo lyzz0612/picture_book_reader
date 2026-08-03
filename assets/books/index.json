@@ -199,7 +199,7 @@
     },
     {
       "id": "book_024",
-      "title": "小熊去动物园",
+      "title": "小明去动物园",
       "mode": "textOnly",
       "coverPath": "books/book_024/cover.png",
       "metaPath": "books/book_024/meta.json",
@@ -208,7 +208,7 @@
     },
     {
       "id": "book_025",
-      "title": "小兔逛超市",
+      "title": "小雨逛超市",
       "mode": "textOnly",
       "coverPath": "books/book_025/cover.png",
       "metaPath": "books/book_025/meta.json",
@@ -217,7 +217,7 @@
     },
     {
       "id": "book_026",
-      "title": "小猫去公园",
+      "title": "小花去公园",
       "mode": "textOnly",
       "coverPath": "books/book_026/cover.png",
       "metaPath": "books/book_026/meta.json",
@@ -226,7 +226,7 @@
     },
     {
       "id": "book_027",
-      "title": "小狗去医院",
+      "title": "小军去医院",
       "mode": "textOnly",
       "coverPath": "books/book_027/cover.png",
       "metaPath": "books/book_027/meta.json",
@@ -235,7 +235,7 @@
     },
     {
       "id": "book_028",
-      "title": "小鸭去幼儿园",
+      "title": "小雅去幼儿园",
       "mode": "textOnly",
       "coverPath": "books/book_028/cover.png",
       "metaPath": "books/book_028/meta.json",
@@ -244,7 +244,7 @@
     },
     {
       "id": "book_029",
-      "title": "小象去海边",
+      "title": "小贝去海边",
       "mode": "textOnly",
       "coverPath": "books/book_029/cover.png",
       "metaPath": "books/book_029/meta.json",
@@ -253,7 +253,7 @@
     },
     {
       "id": "book_030",
-      "title": "小松鼠去农场",
+      "title": "小禾去农场",
       "mode": "textOnly",
       "coverPath": "books/book_030/cover.png",
       "metaPath": "books/book_030/meta.json",
@@ -262,7 +262,7 @@
     },
     {
       "id": "book_031",
-      "title": "小羊去餐厅",
+      "title": "小乐去餐厅",
       "mode": "textOnly",
       "coverPath": "books/book_031/cover.png",
       "metaPath": "books/book_031/meta.json",
