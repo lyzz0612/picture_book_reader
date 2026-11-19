@@ -358,6 +358,141 @@
       "metaPath": "books/book_041/meta.json",
       "estimatedMinutes": 5,
       "category": "lifeHabit"
+    },
+    {
+      "id": "book_042",
+      "title": "守株待兔",
+      "mode": "textOnly",
+      "coverPath": "books/book_042/cover.png",
+      "metaPath": "books/book_042/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_043",
+      "title": "画蛇添足",
+      "mode": "textOnly",
+      "coverPath": "books/book_043/cover.png",
+      "metaPath": "books/book_043/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_044",
+      "title": "对牛弹琴",
+      "mode": "textOnly",
+      "coverPath": "books/book_044/cover.png",
+      "metaPath": "books/book_044/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_045",
+      "title": "叶公好龙",
+      "mode": "textOnly",
+      "coverPath": "books/book_045/cover.png",
+      "metaPath": "books/book_045/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_046",
+      "title": "塞翁失马",
+      "mode": "textOnly",
+      "coverPath": "books/book_046/cover.png",
+      "metaPath": "books/book_046/meta.json",
+      "estimatedMinutes": 8,
+      "category": "idiom"
+    },
+    {
+      "id": "book_047",
+      "title": "哪吒闹海",
+      "mode": "textOnly",
+      "coverPath": "books/book_047/cover.png",
+      "metaPath": "books/book_047/meta.json",
+      "estimatedMinutes": 9,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_048",
+      "title": "嫦娥奔月",
+      "mode": "textOnly",
+      "coverPath": "books/book_048/cover.png",
+      "metaPath": "books/book_048/meta.json",
+      "estimatedMinutes": 9,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_049",
+      "title": "夸父追日",
+      "mode": "textOnly",
+      "coverPath": "books/book_049/cover.png",
+      "metaPath": "books/book_049/meta.json",
+      "estimatedMinutes": 9,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_050",
+      "title": "十二生肖的故事",
+      "mode": "textOnly",
+      "coverPath": "books/book_050/cover.png",
+      "metaPath": "books/book_050/meta.json",
+      "estimatedMinutes": 9,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_051",
+      "title": "鲤鱼跳龙门",
+      "mode": "textOnly",
+      "coverPath": "books/book_051/cover.png",
+      "metaPath": "books/book_051/meta.json",
+      "estimatedMinutes": 9,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_052",
+      "title": "豌豆公主",
+      "mode": "textOnly",
+      "coverPath": "books/book_052/cover.png",
+      "metaPath": "books/book_052/meta.json",
+      "estimatedMinutes": 8,
+      "category": "foreignFable"
+    },
+    {
+      "id": "book_053",
+      "title": "拇指姑娘",
+      "mode": "textOnly",
+      "coverPath": "books/book_053/cover.png",
+      "metaPath": "books/book_053/meta.json",
+      "estimatedMinutes": 9,
+      "category": "foreignFable"
+    },
+    {
+      "id": "book_054",
+      "title": "穿靴子的猫",
+      "mode": "textOnly",
+      "coverPath": "books/book_054/cover.png",
+      "metaPath": "books/book_054/meta.json",
+      "estimatedMinutes": 9,
+      "category": "foreignFable"
+    },
+    {
+      "id": "book_055",
+      "title": "小蝌蚪找妈妈",
+      "mode": "textOnly",
+      "coverPath": "books/book_055/cover.png",
+      "metaPath": "books/book_055/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
+    },
+    {
+      "id": "book_056",
+      "title": "小猴子下山",
+      "mode": "textOnly",
+      "coverPath": "books/book_056/cover.png",
+      "metaPath": "books/book_056/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
     }
   ]
 }
