@@ -493,6 +493,321 @@
       "metaPath": "books/book_056/meta.json",
       "estimatedMinutes": 6,
       "category": "animal"
+    },
+    {
+      "id": "book_057",
+      "title": "亡羊补牢",
+      "mode": "textOnly",
+      "coverPath": "books/book_057/cover.png",
+      "metaPath": "books/book_057/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_058",
+      "title": "掩耳盗铃",
+      "mode": "textOnly",
+      "coverPath": "books/book_058/cover.png",
+      "metaPath": "books/book_058/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_059",
+      "title": "自相矛盾",
+      "mode": "textOnly",
+      "coverPath": "books/book_059/cover.png",
+      "metaPath": "books/book_059/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_060",
+      "title": "刻舟求剑",
+      "mode": "textOnly",
+      "coverPath": "books/book_060/cover.png",
+      "metaPath": "books/book_060/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_061",
+      "title": "滥竽充数",
+      "mode": "textOnly",
+      "coverPath": "books/book_061/cover.png",
+      "metaPath": "books/book_061/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_062",
+      "title": "曹冲称象",
+      "mode": "textOnly",
+      "coverPath": "books/book_062/cover.png",
+      "metaPath": "books/book_062/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_063",
+      "title": "司马光砸缸",
+      "mode": "textOnly",
+      "coverPath": "books/book_063/cover.png",
+      "metaPath": "books/book_063/meta.json",
+      "estimatedMinutes": 7,
+      "category": "idiom"
+    },
+    {
+      "id": "book_064",
+      "title": "后羿射日",
+      "mode": "textOnly",
+      "coverPath": "books/book_064/cover.png",
+      "metaPath": "books/book_064/meta.json",
+      "estimatedMinutes": 9,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_065",
+      "title": "精卫填海",
+      "mode": "textOnly",
+      "coverPath": "books/book_065/cover.png",
+      "metaPath": "books/book_065/meta.json",
+      "estimatedMinutes": 9,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_066",
+      "title": "女娲补天",
+      "mode": "textOnly",
+      "coverPath": "books/book_066/cover.png",
+      "metaPath": "books/book_066/meta.json",
+      "estimatedMinutes": 9,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_067",
+      "title": "愚公移山",
+      "mode": "textOnly",
+      "coverPath": "books/book_067/cover.png",
+      "metaPath": "books/book_067/meta.json",
+      "estimatedMinutes": 9,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_068",
+      "title": "大禹治水",
+      "mode": "textOnly",
+      "coverPath": "books/book_068/cover.png",
+      "metaPath": "books/book_068/meta.json",
+      "estimatedMinutes": 10,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_069",
+      "title": "盘古开天地",
+      "mode": "textOnly",
+      "coverPath": "books/book_069/cover.png",
+      "metaPath": "books/book_069/meta.json",
+      "estimatedMinutes": 10,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_070",
+      "title": "年兽的故事",
+      "mode": "textOnly",
+      "coverPath": "books/book_070/cover.png",
+      "metaPath": "books/book_070/meta.json",
+      "estimatedMinutes": 10,
+      "category": "chineseFable"
+    },
+    {
+      "id": "book_071",
+      "title": "睡美人",
+      "mode": "textOnly",
+      "coverPath": "books/book_071/cover.png",
+      "metaPath": "books/book_071/meta.json",
+      "estimatedMinutes": 9,
+      "category": "foreignFable"
+    },
+    {
+      "id": "book_072",
+      "title": "卖火柴的小女孩",
+      "mode": "textOnly",
+      "coverPath": "books/book_072/cover.png",
+      "metaPath": "books/book_072/meta.json",
+      "estimatedMinutes": 9,
+      "category": "foreignFable"
+    },
+    {
+      "id": "book_073",
+      "title": "皇帝的新装",
+      "mode": "textOnly",
+      "coverPath": "books/book_073/cover.png",
+      "metaPath": "books/book_073/meta.json",
+      "estimatedMinutes": 9,
+      "category": "foreignFable"
+    },
+    {
+      "id": "book_074",
+      "title": "海的女儿",
+      "mode": "textOnly",
+      "coverPath": "books/book_074/cover.png",
+      "metaPath": "books/book_074/meta.json",
+      "estimatedMinutes": 9,
+      "category": "foreignFable"
+    },
+    {
+      "id": "book_075",
+      "title": "杰克与魔豆",
+      "mode": "textOnly",
+      "coverPath": "books/book_075/cover.png",
+      "metaPath": "books/book_075/meta.json",
+      "estimatedMinutes": 9,
+      "category": "foreignFable"
+    },
+    {
+      "id": "book_076",
+      "title": "不莱梅的音乐家",
+      "mode": "textOnly",
+      "coverPath": "books/book_076/cover.png",
+      "metaPath": "books/book_076/meta.json",
+      "estimatedMinutes": 9,
+      "category": "foreignFable"
+    },
+    {
+      "id": "book_077",
+      "title": "阿拉丁神灯",
+      "mode": "textOnly",
+      "coverPath": "books/book_077/cover.png",
+      "metaPath": "books/book_077/meta.json",
+      "estimatedMinutes": 9,
+      "category": "foreignFable"
+    },
+    {
+      "id": "book_078",
+      "title": "小壁虎借尾巴",
+      "mode": "textOnly",
+      "coverPath": "books/book_078/cover.png",
+      "metaPath": "books/book_078/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
+    },
+    {
+      "id": "book_079",
+      "title": "老虎拔牙",
+      "mode": "textOnly",
+      "coverPath": "books/book_079/cover.png",
+      "metaPath": "books/book_079/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
+    },
+    {
+      "id": "book_080",
+      "title": "小熊过桥",
+      "mode": "textOnly",
+      "coverPath": "books/book_080/cover.png",
+      "metaPath": "books/book_080/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
+    },
+    {
+      "id": "book_081",
+      "title": "咕咚来了",
+      "mode": "textOnly",
+      "coverPath": "books/book_081/cover.png",
+      "metaPath": "books/book_081/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
+    },
+    {
+      "id": "book_082",
+      "title": "萝卜回来了",
+      "mode": "textOnly",
+      "coverPath": "books/book_082/cover.png",
+      "metaPath": "books/book_082/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
+    },
+    {
+      "id": "book_083",
+      "title": "小兔子乖乖",
+      "mode": "textOnly",
+      "coverPath": "books/book_083/cover.png",
+      "metaPath": "books/book_083/meta.json",
+      "estimatedMinutes": 6,
+      "category": "animal"
+    },
+    {
+      "id": "book_084",
+      "title": "轩轩去理发店",
+      "mode": "textOnly",
+      "coverPath": "books/book_084/cover.png",
+      "metaPath": "books/book_084/meta.json",
+      "estimatedMinutes": 6,
+      "category": "sceneExperience"
+    },
+    {
+      "id": "book_085",
+      "title": "轩轩坐地铁",
+      "mode": "textOnly",
+      "coverPath": "books/book_085/cover.png",
+      "metaPath": "books/book_085/meta.json",
+      "estimatedMinutes": 6,
+      "category": "sceneExperience"
+    },
+    {
+      "id": "book_086",
+      "title": "轩轩过生日",
+      "mode": "textOnly",
+      "coverPath": "books/book_086/cover.png",
+      "metaPath": "books/book_086/meta.json",
+      "estimatedMinutes": 6,
+      "category": "sceneExperience"
+    },
+    {
+      "id": "book_087",
+      "title": "轩轩看牙医",
+      "mode": "textOnly",
+      "coverPath": "books/book_087/cover.png",
+      "metaPath": "books/book_087/meta.json",
+      "estimatedMinutes": 6,
+      "category": "sceneExperience"
+    },
+    {
+      "id": "book_088",
+      "title": "轩轩学骑车",
+      "mode": "textOnly",
+      "coverPath": "books/book_088/cover.png",
+      "metaPath": "books/book_088/meta.json",
+      "estimatedMinutes": 6,
+      "category": "sceneExperience"
+    },
+    {
+      "id": "book_089",
+      "title": "轩轩去图书馆",
+      "mode": "textOnly",
+      "coverPath": "books/book_089/cover.png",
+      "metaPath": "books/book_089/meta.json",
+      "estimatedMinutes": 6,
+      "category": "sceneExperience"
+    },
+    {
+      "id": "book_090",
+      "title": "小熊按时睡觉",
+      "mode": "textOnly",
+      "coverPath": "books/book_090/cover.png",
+      "metaPath": "books/book_090/meta.json",
+      "estimatedMinutes": 5,
+      "category": "lifeHabit"
+    },
+    {
+      "id": "book_091",
+      "title": "小兔整理书包",
+      "mode": "textOnly",
+      "coverPath": "books/book_091/cover.png",
+      "metaPath": "books/book_091/meta.json",
+      "estimatedMinutes": 5,
+      "category": "lifeHabit"
     }
   ]
 }
